@@ -2,14 +2,23 @@
 title: How am I billed?
 description: A developer focused overview of how billing works on Azure.
 keywords: azure billing, azure portal
-ms.service: azure-devops
-ms.subservice: azure-devops-billing
+ms.service: azure
 ms.topic: overview
-ms.date: 08/04/2022
+ms.date: 07/29/2024
 ms.custom: overview
 ---
 
 # How am I billed?
+
+This is the final installment in a series of 7 articles to help developers get started with Azure.
+
+* Part 1: [Azure for developers overview](azure-developer-overview.md)
+* Part 2: [Key Azure services for developers](azure-developer-key-services.md)
+* Part 3: [Hosting applications on Azure](hosting-apps-on-azure.md)
+* Part 4: [Connect your app to Azure services](connect-to-azure-services.md)
+* Part 5: [How do I create and manage resources in Azure?](azure-developer-create-resources.md)
+* Part 6: [Key concepts for building Azure apps](azure-developer-key-concepts.md)
+* Part 7: **How am I billed?**
 
 When creating applications that use Azure, you need to understand the factors that influence the cost of the solutions you create.  You will also want to understand how you can estimate the cost of a solution, how you're billed, and how you can monitor the costs incurred in your Azure subscriptions.
 
@@ -31,7 +40,7 @@ Organizations often create multiple Azure subscriptions for billing and manageme
 If you have an individual Azure account tied to your Microsoft account, it's also possible to have multiple subscriptions.  For example, a user might have both a Visual Studio Enterprise subscription that provides monthly Azure credits and a Pay-as-you-go subscription which bills to their credit card.  In this scenario, you again want to be sure and choose the right subscription when creating Azure resources to avoid an unexpected bill for Azure services.
 
 
-> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE50ydI]
+> [!VIDEO 05835149-e242-48c6-b041-7d70918ae6c6]
 
 
 ## What factors influence the cost of a service on Azure?
@@ -90,3 +99,4 @@ Learn more about cost alerts and **Azure Cost Management**:
 - [Use cost alerts to monitor usage and spending](/azure/cost-management-billing/costs/cost-mgt-alerts-monitor-usage-spending)
 - [What is Azure Cost Management + Billing?](/azure/cost-management-billing/cost-management-billing-overview)
 - [How to optimize your cloud investment with Azure Cost Management](/azure/cost-management-billing/costs/cost-mgt-best-practices)
+

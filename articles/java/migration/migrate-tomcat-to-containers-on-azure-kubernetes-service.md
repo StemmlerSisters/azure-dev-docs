@@ -1,15 +1,15 @@
 ---
-title: Migrate Tomcat Applications to containers on Azure Kubernetes Service
-description: This guide describes what you should be aware of when you want to migrate an existing Tomcat application to run in an Azure Kubernetes Service container.
+title: Migrate Tomcat Applications to containers on Azure Kubernetes Service (AKS)
+description: This guide describes what you should be aware of when you want to migrate an existing Tomcat application to run in an Azure Kubernetes Service (AKS) container.
 author: KarlErickson
 ms.author: karler
 ms.topic: conceptual
-ms.date: 1/20/2020
+ms.date: 09/20/2024
 ms.custom: devx-track-java, devx-track-azurecli, migration-java, devx-track-extended-java
 recommendations: false
 ---
 
-# Migrate Tomcat applications to containers on Azure Kubernetes Service
+# Migrate Tomcat applications to containers on Azure Kubernetes Service (AKS)
 
 This guide describes what you should be aware of when you want to migrate an existing Tomcat application to run on Azure Kubernetes Service (AKS).
 
@@ -70,6 +70,8 @@ Before you create container images, migrate your application to the JDK and Tomc
 
 In the pre-migration, you'll likely have identified secrets and external dependencies, such as datasources, in *server.xml* and *context.xml* files. For each item thus identified, replace any username, password, connection string, or URL with an environment variable.
 
+[!INCLUDE [security-note](../includes/security-note.md)]
+
 For example, suppose the *context.xml* file contains the following element:
 
 ```xml
@@ -79,7 +81,7 @@ For example, suppose the *context.xml* file contains the following element:
     url="jdbc:postgresql://postgresdb.contoso.com/wickedsecret?ssl=true"
     driverClassName="org.postgresql.Driver"
     username="postgres"
-    password="t00secure2gue$$"
+    password="{password}"
 />
 ```
 
@@ -136,9 +138,9 @@ To determine whether your application uses clustering, look for the `<Cluster>` 
 
 #### Add JNDI resources
 
-Edit *server.xml* to add the resources you prepared in the pre-migration steps, such as Data Sources.
+Edit *server.xml* to add the resources you prepared in the pre-migration steps, such as Data Sources, as shown in the following example:
 
-For example:
+[!INCLUDE [security-note](../includes/security-note.md)]
 
 ```xml
 <!-- Global JNDI resources
@@ -242,6 +244,8 @@ You might want to create a Persistent Volume using Azure Files mounted to the To
 
 You'll need to modify the startup script (*startup.sh* in the [Tomcat on Containers](https://github.com/Azure/tomcat-container-quickstart) GitHub repository) to import the certificates into the local keystore on the container.
 
+[!INCLUDE [security-note](../includes/security-note.md)]
+
 ### Migrate scheduled jobs
 
 To execute scheduled jobs on your AKS cluster, define [Cron Jobs](https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/) as needed.
@@ -250,7 +254,7 @@ To execute scheduled jobs on your AKS cluster, define [Cron Jobs](https://kubern
 
 Now that you've migrated your application to AKS, you should verify that it works as you expect. Once you've done that, we have some recommendations for you that can make your application more Cloud native.
 
-* Consider adding a DNS name to the IP address allocated to your ingress controller or application load balancer. For more information, see [Create an ingress controller with a static public IP address in AKS](/azure/aks/ingress-static-ip).
+* Consider adding a DNS name to the IP address allocated to your ingress controller or application load balancer. For more information, see [Use TLS with an ingress controller on Azure Kubernetes Service (AKS)](/azure/aks/ingress-static-ip).
 
 * Consider [adding HELM charts for your application](https://helm.sh/docs/topics/charts/). A helm chart allows you to parameterize your application deployment for use and customization by a more diverse set of customers.
 

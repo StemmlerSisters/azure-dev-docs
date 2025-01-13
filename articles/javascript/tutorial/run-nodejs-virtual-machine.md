@@ -3,7 +3,7 @@ title: Azure CLI virtual machine with Express.js
 description: Create an Azure Linux virtual machine, with a clone of an Express.js-based app from a GitHub repository.  
 ms.topic: how-to
 ms.date: 02/09/2023
-ms.custom: devx-track-js, devx-track-azurecli, engagement-fy23
+ms.custom: devx-track-js, devx-track-azurecli, engagement-fy23, linux-related-content
 # Must use non-internal sub
 ---
 
@@ -29,10 +29,9 @@ This tutorial includes the following tasks:
     * View list of traces with Azure portal
 * Remove resources with Azure CLI
 
-[!INCLUDE [Create or use existing Azure Subscription ](../includes/environment-subscription-h2.md)]
-
 ## Prerequisites
 
+- An Azure user account and subscription: [create a free subscription](https://azure.microsoft.com/free/?utm_source=campaign&utm_campaign=azure-docs-js-dev-vscode-tutorial-appservice-extension&mktingSource=azure-docs-js-dev-vscode-tutorial-appservice-extension).
 - SSH to connect to the VM: Use Azure Cloud Shell or a modern terminal such as bash shell, which includes SSH.
 [!INCLUDE [include](~/../articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
@@ -348,7 +347,7 @@ If you have issues, use the following table to understand how to resolve your is
 
 ## Sample code
 
-* [Express.js virtual machine sample code](https://github.com/Azure-Samples/js-e2e-vm)
+* [Express.js virtual machine sample code](https://github.com/Azure-Samples/azure-typescript-e2e-apps/tree/main/api-expressjs-vm)
 
 ## Next steps
 

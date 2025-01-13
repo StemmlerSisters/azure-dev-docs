@@ -4,7 +4,7 @@ description: Learn how to configure continuous build and integration for your Se
 keywords: jenkins, azure, devops, cicd, linux, service fabric, cluster
 ms.topic: tutorial
 ms.date: 07/31/2018
-ms.custom: devx-track-jenkins
+ms.custom: devx-track-jenkins, linux-related-content
 ---
 
 # Tutorial: Deploy to a Service Fabric cluster
@@ -66,7 +66,7 @@ You can set up Jenkins either inside or outside a Service Fabric cluster. The fo
    1. Click on **Connect** for the file-share and note the values it displays under **Connecting from Linux**, the value should look similar to the one below:
 
       ```sh
-      sudo mount -t cifs //sfjenkinsstorage1.file.core.windows.net/sfjenkins [mount point] -o vers=3.0,username=sfjenkinsstorage1,password=<storage_key>,dir_mode=0777,file_mode=0777
+      sudo mount -t cifs //sfjenkinsstorage1.file.core.windows.net/sfjenkins [mount point] -o vers=3.0,username=<username>,password=<storage-key>,dir_mode=0777,file_mode=0777
       ```
 
    > [!NOTE]
@@ -78,7 +78,7 @@ You can set up Jenkins either inside or outside a Service Fabric cluster. The fo
    vi JenkinsSF/JenkinsOnSF/Code/setupentrypoint.sh
    ```
    * Replace `[REMOTE_FILE_SHARE_LOCATION]` with the value `//sfjenkinsstorage1.file.core.windows.net/sfjenkins` from the output of the connect in step 2 above.
-   * Replace `[FILE_SHARE_CONNECT_OPTIONS_STRING]` with the value `vers=3.0,username=sfjenkinsstorage1,password=GB2NPUCQY9LDGeG9Bci5dJV91T6SrA7OxrYBUsFHyueR62viMrC6NIzyQLCKNz0o7pepGfGY+vTa9gxzEtfZHw==,dir_mode=0777,file_mode=0777` from step 2 above.
+   * Replace `[FILE_SHARE_CONNECT_OPTIONS_STRING]` with the value `vers=3.0,username=<username>,password=<storage-key>,dir_mode=0777,file_mode=0777` from step 2 above.
 
 1. **Secure Cluster Only:** 
    
@@ -105,7 +105,7 @@ You can set up Jenkins either inside or outside a Service Fabric cluster. The fo
    ```
    The preceding command takes the certificate in PEM format. If your certificate is in PFX format, you can use the following command to convert it. If your PFX file isn't password protected, specify the **passin** parameter as `-passin pass:`.
    ```sh
-   openssl pkcs12 -in cert.pfx -out cert.pem -nodes -passin pass:MyPassword1234!
+   openssl pkcs12 -in cert.pfx -out cert.pem -nodes -passin pass:<password>
    ``` 
    
    **Unsecure Cluster**
@@ -239,7 +239,7 @@ The steps in this section show you how to configure a Jenkins job to respond to 
         If the PFX file is password protected, include the password in the `-passin` parameter. For example:
 
         ```sh
-        openssl pkcs12 -in clustercert.pfx -out clustercert.pem -nodes -passin pass:MyPassword1234!
+        openssl pkcs12 -in clustercert.pfx -out clustercert.pem -nodes -passin pass:<password>
         ``` 
 
      1. To get the container ID for your Jenkins container, run `docker ps` from your host.
@@ -256,7 +256,7 @@ You're almost finished! Keep the Jenkins job open. The only remaining task is to
 
 ## Configure deployment using cluster management endpoint
 
-For development and test environments, you can use the cluster management endpoint to deploy your application. Configuring the post-build action with the cluster management endpoint to deploy your application requires the least amount of set-up. If you're deploying to a production environment, skip ahead to [Configure deployment using Azure credentials](#configure-deployment-using-azure-credentials) to configure an Azure Active Directory service principal to use during deployment.    
+For development and test environments, you can use the cluster management endpoint to deploy your application. Configuring the post-build action with the cluster management endpoint to deploy your application requires the least amount of set-up. If you're deploying to a production environment, skip ahead to [Configure deployment using Azure credentials](#configure-deployment-using-azure-credentials) to configure a Microsoft Entra service principal to use during deployment.
 
 1. In the Jenkins job, click the **Post-build Actions** tab. 
 1. From the **Post-Build Actions** drop-down, select **Deploy Service Fabric Project**. 
@@ -271,15 +271,15 @@ For development and test environments, you can use the cluster management endpoi
 
 ## Configure deployment using Azure credentials
 
-For production environments, configuring an Azure credential to deploy your application is strongly recommended. This section shows you how to configure an Azure Active Directory service principal to use to deploy your application in the post-build action. You can assign service principals to roles in your directory to limit the permissions of the Jenkins job. 
+For production environments, configuring an Azure credential to deploy your application is strongly recommended. This section shows you how to configure a Microsoft Entra service principal to use to deploy your application in the post-build action. You can assign service principals to roles in your directory to limit the permissions of the Jenkins job. 
 
 For development and test environments, you can configure either Azure credentials or the cluster management endpoint to deploy your application. For details about how to configure a cluster management endpoint, see [Configure deployment using cluster management endpoint](#configure-deployment-using-cluster-management-endpoint).   
 
-1. To create an Azure Active Directory service principal and assign it permissions in your Azure subscription, follow the steps in [Use the portal to create an Azure Active Directory application and service principal](/azure/azure-resource-manager/resource-group-create-service-principal-portal). Pay attention to the following:
+1. To create a Microsoft Entra service principal and assign it permissions in your Azure subscription, follow the steps in [Use the portal to create a Microsoft Entra application and service principal](/azure/azure-resource-manager/resource-group-create-service-principal-portal). Pay attention to the following:
 
    * While following the steps in the topic, be sure to copy and save the following values: *Application ID*, *Application key*, *Directory ID (Tenant ID)*, and *Subscription ID*. You need them to configure the Azure credentials in Jenkins.
    * If you don't have the [required permissions](/azure/azure-resource-manager/resource-group-create-service-principal-portal#required-permissions) on your directory, you'll need to ask an administrator to either grant you the permissions or create the service principal for you, or you'll need to configure the management endpoint for your cluster in the **Post-Build Actions** for your job in Jenkins.
-   * In the [Create an Azure Active Directory application](/azure/azure-resource-manager/resource-group-create-service-principal-portal#create-an-azure-active-directory-application) section, you can enter any well-formed URL for the **Sign-on URL**.
+   * In the [Create a Microsoft Entra application](/azure/azure-resource-manager/resource-group-create-service-principal-portal#create-an-azure-active-directory-application) section, you can enter any well-formed URL for the **Sign-on URL**.
    * In the [Assign application to a Role](/azure/azure-resource-manager/resource-group-create-service-principal-portal) section, you can assign your application the *Reader* role on the resource group for your cluster.
 
 1. Back in the Jenkins job, click the **Post-build Actions** tab.

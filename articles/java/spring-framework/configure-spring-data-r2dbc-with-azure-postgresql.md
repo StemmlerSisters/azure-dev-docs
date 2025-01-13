@@ -1,15 +1,11 @@
 ---
 title: Use Spring Data R2DBC with Azure Database for PostgreSQL
 description: Learn how to use Spring Data R2DBC with an Azure Database for PostgreSQL database.
-documentationcenter: java
-ms.author: bbenz
+ms.author: hangwan
 ms.date: 07/22/2022
-ms.service: postgresql
-ms.tgt_pltfrm: multiple
 author: KarlErickson
 ms.topic: article
 ms.custom: devx-track-java, devx-track-azurecli, team=cloud_advocates, spring-cloud-azure, devx-track-extended-java
-ms.contributors: judubois-09162021
 ---
 
 # Use Spring Data R2DBC with Azure Database for PostgreSQL
@@ -51,7 +47,7 @@ Replace the placeholders with the following values, which are used throughout th
 - `<YOUR_POSTGRESQL_ADMIN_PASSWORD>` and `<YOUR_POSTGRESQL_NON_ADMIN_PASSWORD>`: The password of your PostgreSQL database server, which should have a minimum of eight characters. The characters should be from three of the following categories: English uppercase letters, English lowercase letters, numbers (0-9), and non-alphanumeric characters (!, $, #, %, and so on).
 - `<YOUR_LOCAL_IP_ADDRESS>`: The IP address of your local computer, from which you'll run your Spring Boot application. One convenient way to find it is to open [whatismyip.akamai.com](http://whatismyip.akamai.com/).
 
----
+[!INCLUDE [security-note](../includes/security-note.md)]
 
 Next, create a resource group by using the following command:
 
@@ -142,6 +138,8 @@ Next, create a non-admin user and grant all permissions to the database.
 > You can read more detailed information about creating PostgreSQL users in [Create users in Azure Database for PostgreSQL](/azure/PostgreSQL/flexible-server/how-to-create-users).
 
 Create a SQL script called *create_user.sql* for creating a non-admin user. Add the following contents and save it locally:
+
+[!INCLUDE [security-note](../includes/security-note.md)]
 
 ```bash
 cat << EOF > create_user.sql
@@ -251,6 +249,6 @@ Congratulations! You've created a fully reactive Spring Boot application that us
 
 ## See also
 
-For more information about Spring Data R2DBC, see Spring's [reference documentation](https://docs.spring.io/spring-data/r2dbc/docs/current/reference/html/#reference).
+For more information about Spring Data R2DBC, see Spring's [reference documentation](https://docs.spring.io/spring-data/r2dbc/docs/current-SNAPSHOT/reference/html/#reference).
 
 For more information about using Azure with Java, see [Azure for Java developers](../index.yml) and [Working with Azure DevOps and Java](/azure/devops/).

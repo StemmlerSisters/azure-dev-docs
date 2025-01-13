@@ -1,16 +1,15 @@
 ---
-title: Migrate WebLogic Server applications to Azure Kubernetes Service
-description: Migrate WebLogic Server applications to Azure Kubernetes Service
+title: Migrate WebLogic Server applications to Azure Kubernetes Service (AKS)
+description: Migrate WebLogic Server applications to Azure Kubernetes Service (AKS)
 author: KarlErickson
 ms.author: edburns
 ms.topic: conceptual
 ms.date: 09/30/2022
-keywords: java, jakartaee, javaee, microprofile, open-liberty, websphere-liberty, aks, kubernetes, jcache, redisson
 ms.custom: template-how-to, devx-track-java, devx-track-javaee, devx-track-javaee-wls, devx-track-javaee-wls-aks, devx-track-extended-java
-#Customer intent: As a Java developer, I want to migrate my on-premise WebLogic Server workload to WebLogic on Azure Kubernetes Service
+#Customer intent: As a Java developer, I want to migrate my on-premise WebLogic Server workload to WebLogic on Azure Kubernetes Service (AKS)
 ---
 
-# Migrate WebLogic Server applications to Azure Kubernetes Service
+# Migrate WebLogic Server applications to Azure Kubernetes Service (AKS)
 
 This guide describes what you should be aware of when you want to migrate an existing WebLogic Server (WLS) application to run on Azure Kubernetes Service (AKS).
 
@@ -35,6 +34,8 @@ Once you've decided that AKS is the appropriate deployment target, you must acce
 If you don't use the prebuilt Azure Marketplace offer, you must learn how to use the operator directly. Mastering the operator is beyond the scope of this article. The complete documentation for the WLS Kubernetes Operator is available at [Oracle](https://aka.ms/wlsoperator).
 
 The remainder of this section provides some considerations for deciding to use the prebuilt Azure Marketplace offer or using the operator directly.
+
+#### Decide whether to use the prebuilt Azure Marketplace offer
 
 First, you have to understand the concept of the WLS "domain". A domain is a logically related group of WLS resources. For the canonical definition of WLS domain, see [the Oracle documentation](https://aka.ms/javaee/wls/domains). Running WLS on AKS requires deciding how AKS deals with domains. The various choices are referred to as "domain home source type". The WLS Kubernetes operator supports three choices of domain home source type. The prebuilt Azure Marketplace offer uses the first one in this table.
 
@@ -92,7 +93,7 @@ The prebuilt Azure Marketplace offer automatically creates a domain resource. If
 
 [!INCLUDE [determine-whether-session-replication-is-used](includes/determine-whether-session-replication-is-used.md)]
 
-The prebuilt Azure Marketplace offer supports session affinity via the Application Gateway ingress controller. When deploying the offer, select **Enable cookie based affinity**. Look for cookie based affinity in [the documentation for the offer](https://aka.ms/wls-aks-docs#networking).
+The prebuilt Azure Marketplace offer supports session affinity via the Application Gateway ingress controller. Cookie based affinity is enabled by default. You can select **Disable cookie based affinity** to disable it. Look for cookie based affinity in [the documentation for the offer](https://aka.ms/wls-aks-docs#networking).
 
 [!INCLUDE [document-datasources](includes/document-datasources.md)]
 

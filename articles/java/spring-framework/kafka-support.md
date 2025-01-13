@@ -3,14 +3,14 @@ title: Spring Cloud Azure kafka support
 description: This article describes how Spring Cloud Azure and Kafka can be used together.
 ms.date: 04/06/2023
 author: KarlErickson
-ms.author: v-yeyonghui
+ms.author: hangwan
 ms.topic: reference
 ms.custom: devx-track-java, devx-track-extended-java
 ---
 
 # Spring Cloud Azure Kafka support
 
-**This article applies to:** ✔️ Version 4.12.0 ✔️ Version 5.6.0
+**This article applies to:** ✅ Version 4.19.0 ✅ Version 5.19.0
 
 From version 4.3.0, Spring Cloud Azure for Kafka supports various types of credentials to authenticate and connect to Azure Event Hubs.
 
@@ -131,7 +131,7 @@ The following table shows the Spring Boot Kafka common configuration options:
 > | spring.kafka.properties.azure.credential.password                                                            | Password to use when performing username/password authentication with Azure.                                                                                                                           |
 > | spring.kafka.properties.azure.credential.username                                                            | Username to use when performing username/password authentication with Azure.                                                                                                                           |
 > | spring.kafka.properties.azure.profile.environment.active-directory-endpoint                                  | The Microsoft Entra endpoint to connect to.                                                                                                                                                     |
-> | spring.kafka.properties.azure.profile.tenant-id                                                              | Tenant ID for Azure resources.                                                                                                                                                                         |
+> | spring.kafka.properties.azure.profile.tenant-id                                                              | Tenant ID for Azure resources. The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID.                                                                                                                                              |
 
 > [!NOTE]
 > The configuration options in different levels apply the following rules. The more specific configuration options have higher priority than the common ones. For example:
@@ -207,7 +207,7 @@ This section describes the usage scenario for Spring Boot application using Spri
 </dependency>
 ```
 
-<a name="spring-kafka-configuraiton-setup"></a>
+<a name="spring-kafka-configuration-setup"></a>
 ##### Configuration update
 
 To use the OAuth authentication, just specify the Event Hubs endpoint, as shown in the following example:
@@ -247,6 +247,23 @@ spring.cloud.stream.kafka.binder.brokers=<NAMESPACENAME>.servicebus.windows.net:
 >
 > For version after `4.4.0`, this property will be added automatically for each Kafka binder environment, so there's no need for you to add it manually.
 
+#### Use managed identity for OAuth authentication
+
+1. To use the managed identity, you need enable the managed identity for your service and assign the `Azure Event Hubs Data Receiver` and `Azure Event Hubs Data Sender` roles. For more information, see [Assign Azure roles for access rights](/azure/event-hubs/authorize-access-azure-active-directory#assign-azure-roles-for-access-rights).
+
+1. Configure the following properties in your *application.yml* file:
+
+   ```yaml
+   spring:
+     cloud:
+       azure:
+         credential:
+           managed-identity-enabled: true
+   ```
+
+   > [!IMPORTANT]
+   > If you're using user-assigned managed identity, you also need to add the property `spring.cloud.azure.credential.client-id` with your user-assigned managed identity client ID.
+
 ##### Samples
 
 See the [azure-spring-boot-samples](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/eventhubs/spring-cloud-azure-starter/spring-cloud-azure-sample-eventhubs-kafka) repository on GitHub.
@@ -256,23 +273,19 @@ See the [azure-spring-boot-samples](https://github.com/Azure-Samples/azure-sprin
 
 You can use connection string authentication directly or use the Azure Resource Manager to retrieve the connection string.
 
+###### [Spring Cloud Azure 5.x](#tab/SpringCloudAzure5x)
+
+> [!NOTE]
+> Since version of 5.0.0, when using connection string authentication with Spring Cloud Stream framework, the following property is still required to ensure that the connection string can take effect, where the value of `<kafka-binder-name>` should be `kafka` when there is no customized configuration for your Kafka binder name: `spring.cloud.stream.binders.<kafka-binder-name>.environment.spring.main.sources=com.azure.spring.cloud.autoconfigure.implementation.eventhubs.kafka.AzureEventHubsKafkaAutoConfiguration`
+>
+> If the version of `spring-cloud-dependencies` you used is `2022.0.0`, you'll encounter exception the `java.lang.IllegalStateException: kafka_context has not been refreshed yet`. To solve this problem, upgrade to a higher version.
+
 ###### [Spring Cloud Azure 4.x](#tab/SpringCloudAzure4x)
 
 > [!NOTE]
 > Since version of 4.3.0, connection string authentication is deprecated in favor of OAuth authentications.
 >
-> Since version of 4.5.0, when using connection string authentication with Spring Cloud Stream framework, the following property is required to ensure that the connection string can take effect, where the value of *`<kafka-binder-name>`* should be `kafka` when there is no customized configuration for your Kafka binder name.
->
-> `spring.cloud.stream.binders.<kafka-binder-name>.environment.spring.main.sources=com.azure.spring.cloud.autoconfigure.eventhubs.kafka.AzureEventHubsKafkaAutoConfiguration`
-
-###### [Spring Cloud Azure 5.x](#tab/SpringCloudAzure5x)
-
-> [!NOTE]
-> Since version of 5.0.0, when using connection string authentication with Spring Cloud Stream framework, the following property is still required to ensure that the connection string can take effect, where the value of *`<kafka-binder-name>`* should be `kafka` when there is no customized configuration for your Kafka binder name.
->
-> `spring.cloud.stream.binders.<kafka-binder-name>.environment.spring.main.sources=com.azure.spring.cloud.autoconfigure.implementation.eventhubs.kafka.AzureEventHubsKafkaAutoConfiguration`
-> 
-> If the version of `spring-cloud-dependencies` you used is `2022.0.0`, you'll encounter exception the `java.lang.IllegalStateException: kafka_context has not been refreshed yet`. To solve this problem, upgrade to a higher version.
+> Since version of 4.5.0, when using connection string authentication with Spring Cloud Stream framework, the following property is required to ensure that the connection string can take effect, where the value of `<kafka-binder-name>` should be `kafka` when there is no customized configuration for your Kafka binder name: `spring.cloud.stream.binders.<kafka-binder-name>.environment.spring.main.sources=com.azure.spring.cloud.autoconfigure.eventhubs.kafka.AzureEventHubsKafkaAutoConfiguration`
 
 ---
 

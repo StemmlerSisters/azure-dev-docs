@@ -4,7 +4,7 @@ description: This guide describes what you should be aware of when you want to m
 author: KarlErickson
 ms.author: karler
 ms.topic: conceptual
-ms.date: 1/20/2020
+ms.date: 09/20/2024
 ms.custom: devx-track-java, migration-java, devx-track-extended-java
 recommendations: false
 ---
@@ -47,7 +47,7 @@ To obtain the current version used by Azure App Service, download [Tomcat 9](htt
 <!-- App-Service-specific addendum to inventory-persistence-usage -->
 #### Dynamic or internal content
 
-For files that are frequently written and read by your application (such as temporary data files), or static files that are visible only to your application, you can mount Azure Storage into the App Service file system. For more information, see [Serve content from Azure Storage in App Service on Linux](/azure/app-service/configure-connect-to-azure-storage).
+For files that are frequently written and read by your application (such as temporary data files), or static files that are visible only to your application, you can mount Azure Storage into the App Service file system. For more information, see [Mount Azure Storage as a local share in App Service](/azure/app-service/configure-connect-to-azure-storage).
 
 ### Identify session persistence mechanism
 
@@ -105,6 +105,8 @@ If you use [AccessLogValve](https://tomcat.apache.org/tomcat-9.0-doc/api/org/apa
 
 In the pre-migration steps, you likely identified some secrets and external dependencies, such as datasources, in *server.xml* and *context.xml* files. For each item you identified, replace any username, password, connection string, or URL with an environment variable.
 
+[!INCLUDE [security-note](../includes/security-note.md)]
+
 For example, suppose the *context.xml* file contains the following element:
 
 ```xml
@@ -114,7 +116,7 @@ For example, suppose the *context.xml* file contains the following element:
     url="jdbc:postgresql://postgresdb.contoso.com/wickedsecret?ssl=true"
     driverClassName="org.postgresql.Driver"
     username="postgres"
-    password="t00secure2gue$$"
+    password="{password}"
 />
 ```
 
@@ -213,6 +215,8 @@ Now that you have your application migrated to Azure App Service you should veri
 * If you opted to use the */home* directory for file storage, consider [replacing it with Azure Storage](/azure/app-service/configure-connect-to-azure-storage).
 
 * If you have configuration in the */home* directory that contains connection strings, SSL keys, and other secret information, consider using a combination of [Azure Key Vault](/azure/app-service/app-service-key-vault-references) and/or [parameter injection with application settings](/azure/app-service/configure-common#configure-app-settings) where possible.
+
+  [!INCLUDE [security-note](../includes/security-note.md)]
 
 * Consider [using Deployment Slots](/azure/app-service/deploy-staging-slots) for reliable deployments with zero downtime.
 

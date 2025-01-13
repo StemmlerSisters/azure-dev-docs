@@ -44,7 +44,7 @@ Create the following accounts:
 
 Install the following on your local development computer:
 
-- [Node.js](https://nodejs.org/en/download/releases/) v18+
+- [Node.js](https://nodejs.org) LTS
 - [Visual Studio Code](https://code.visualstudio.com/Download) (VS Code)
 - [Azure Static Web Apps (SWA) CLI](https://azure.github.io/static-web-apps-cli/docs/use/install) installed globally with `-g` flag
 - [Azure Functions Core Tools](/azure/azure-functions/functions-core-tools-reference?tabs=v2) v4.0.5095+ (if running locally) installed globally with `-g` flag
@@ -73,7 +73,7 @@ Fork the [sample repository](https://github.com/Azure-Samples/azure-typescript-e
 1. Install dependencies for the local back-end app:
 
     ```bash
-    cd ../apiV4-inmemory && npm install && cd ..
+    cd ../api-inmemory && npm install && cd ..
     ```
 
 
@@ -131,7 +131,7 @@ The previous section of running the static web app with the API was optional. Th
 
 To use the **preview version of the Azure Functions v4 runtime**, you need to create a new Azure Functions app. Your static web app also needs to be rebuilt and redeployed to use the Azure Functions app URI in the **Fetch** requests to the API instead of using a proxied and managed API.
 
-1. In a web browser, open the Azure portal to create a new Azure Functions app: [Create new app](https://ms.portal.azure.com/#create/Microsoft.FunctionApp)
+1. In a web browser, open the Azure portal to create a new Azure Functions app: [Create new app](https://portal.azure.com/#create/Microsoft.FunctionApp)
 
 1. Use the following information to create the Function App::
 
@@ -218,7 +218,7 @@ To use the **preview version of the Azure Functions v4 runtime**, you need to cr
 
 This creation process deploys the same forked GitHub sample repository to Azure. You configure the deployment to use only the front-end app. 
 
-1. Open the Azure portal and sign in with your Azure account: [Azure portal](https://ms.portal.azure.com/#create/Microsoft.StaticApp).
+1. Open the Azure portal and sign in with your Azure account: [Azure portal](https://portal.azure.com/#create/Microsoft.StaticApp).
 1. Use the following information to complete the creation steps:
 
     |Prompt|Setting|

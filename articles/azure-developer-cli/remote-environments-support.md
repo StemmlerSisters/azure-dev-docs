@@ -3,7 +3,7 @@ title: Remote Environments Support
 description: How to use remote environments in `azd` via remote state
 author: gkulin
 ms.author: gracekulin
-ms.date: 10/04/2023
+ms.date: 9/13/2024
 ms.service: azure-dev-cli
 ms.topic: conceptual
 ms.custom: devx-track-azdevcli
@@ -61,7 +61,7 @@ state:
 #### Configuration
 - **accountName**: Name of the Azure storage account
 - **containerName**: Name of the container within the storage account where configuration is stored. Defaults to the current azd project name if not specified
-- **endpoint**: Azure Endpoint used when configuring remote state. _Defaults to `blob.core.windows.net`_
+- **endpoint**: Azure Endpoint used when configuring remote state. _Defaults to `core.windows.net`_
 
 ## Remote state and `azd` commands
 

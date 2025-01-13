@@ -2,19 +2,34 @@
 title: Hosting applications on Azure
 description: An overview of the different ways to host your applications on Azure
 keywords: azure app service, azure functions, azure virtual machines, azure container instances, azure container registry
-ms.service: azure-devops
-ms.subservice: azure-devops-reference
+ms.service: azure
+ms.custom: devx-track-extended-java
 ms.topic: overview
-ms.date: 10/24/2022
+ms.date: 07/29/2024
 #CustomerIntent: As an experienced developer, I want to select the correct hosting services for my applications so that I can get the level of control versus responsibility to meet my business and team needs.
 ---
 
 # Hosting applications on Azure
 
+This is part three in a series of 7 articles to help developers get started with Azure.
+
+* Part 1: [Azure for developers overview](azure-developer-overview.md)
+* Part 2: [Key Azure services for developers](azure-developer-key-services.md)
+* Part 3: **Hosting applications on Azure**
+* Part 4: [Connect your app to Azure services](connect-to-azure-services.md)
+* Part 5: [How do I create and manage resources in Azure?](azure-developer-create-resources.md)
+* Part 6: [Key concepts for building Azure apps](azure-developer-key-concepts.md)
+* Part 7: [How am I billed?](azure-developer-billing.md)
+
 Azure provides a variety of different ways to host your application depending on your needs. This article suggests services to match requirements. It isn't proscriptive. You can mix and match services to meet your needs. Most production environments use a combination of services to meet their business and organizational needs.
 
+The services you choose will often come down to two considerations:
+- Do you prefer simplicity or control?
+- Do you prefer cloud-native (i.e., containers) or Azure-native (tailored tools and integrations)
 
-> [!VIDEO https://www.microsoft.com/videoplayer/embed/RE50vLy title="Azure hosting services" /]
+The following video explains the first consideration: simplicity versus control:
+
+> [!VIDEO c3791642-781c-49cc-8319-8798e9b3659f]
 
 ## Simplicity and control
 
@@ -144,7 +159,7 @@ Cloud edge is a term to indicate if the Cloud service is located to benefit the 
 |--|--|
 |[Azure App Service][azure-app-service]|Use this service for typical web hosting. This supports a wide set of functionality API endpoints, full-stack applications, and background tasks. This service comes with many programming language runtimes as well as the ability to provide your own stack, language, or workload from a container.|
 |[Azure Functions][azure-functions]|Use this service to provide your own code in the supported languages for either HTTP endpoints or event-based triggers from Azure services.|
-|[Azure Spring Apps][azure-spring-apps]|Use to deploy String Boot applications without code changes.|
+|[Azure Spring Apps][azure-spring-apps]|Use to deploy Spring Boot applications without code changes.|
 |[Azure Container Apps][azure-container-apps]|Use to host managed microservices and containerized applications on a serverless platform.|
 |[Azure Container Instances][azure-container-instances]|Use this for simple container scenarios that don't need container orchestration.|
 |[Azure Kubernetes Service][azure-kubernetes]|Use this service when you need a Kubernetes cluster. The control plane to manage the cluster is created and provided for you at no extra cost.|
@@ -211,7 +226,7 @@ Learn more about [High-performance computing on Azure](/azure/architecture/topic
 | Service| Description| 
 |--|--|
 |[Azure DevOps][azure-devops]|Use Azure DevOps for tight integration with the Azure cloud including authentication and authorization to the hosted agents, which build and deploy your application.|
-|[GitHub Actions][github-actions]| Use GitHub Actions to build and deploy your GitHub repository applications. Use the Azure CLI to securely access Azure withing the action.|
+|[GitHub Actions][github-actions]| Use GitHub Actions to build and deploy your GitHub repository applications. Use the Azure CLI to securely access Azure within the action.|
 |[Azure Virtual Machines][azure-virtual-machines]|If you use another CI/CD system, you can use Azure Virtual Machines to host your CI/CD system.|
 
 ## Java resources
@@ -253,3 +268,8 @@ Learn more about [High-performance computing on Azure](/azure/architecture/topic
 [power-virtual-agents]:/power-virtual-agents
 
 [quantum]:/azure/quantum
+
+
+> [!div class="nextstepaction"]
+> [Continue to part 4: Connect your app to Azure services](connect-to-azure-services.md)
+

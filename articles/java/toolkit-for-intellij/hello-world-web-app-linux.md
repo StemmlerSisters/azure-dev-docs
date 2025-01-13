@@ -2,13 +2,11 @@
 title: Deploy a Hello World web app to a Linux container
 titleSuffix: Azure Toolkit for IntelliJ
 description: Run a basic Hello World web app in a Linux container and deploy it to the cloud using the Azure Toolkit for IntelliJ.
-services: app-service\web
-documentationcenter: java
+author: KarlErickson
+ms.author: jialuogan
 ms.date: 09/09/2020
-ms.service: azure-java
-ms.tgt_pltfrm: multiple
 ms.topic: article
-ms.custom: devx-track-java, devx-track-extended-java
+ms.custom: devx-track-java, devx-track-extended-java, linux-related-content
 ---
 
 # Deploy Java app to Azure Web Apps for Containers using Azure Toolkit for IntelliJ
@@ -115,13 +113,13 @@ The following steps walk you through configuring Docker support for your web app
 
    :::image type="content" source="media/hello-world-web-app-linux/docker-support-file.png" alt-text="The docker support file.":::
 
-1. After you have added Docker support, right-click your project in the project explorer, expand **Azure**, and then click **Run on Web App for Containers**.
+1. After you have added Docker support, right-click your project in the project explorer, expand **Azure**, and then click **Deploy Image to Web App**.
 
-1. On the **Run on Web App for Containers** dialog box, fill in the following information:
+1. On the **Deploy Image to Web App** dialog box, fill in the following information:
 
    * **Name**: This specifies the friendly name which is displayed in the Azure Toolkit. 
 
-   * **Container Registry**: Choose the container registry from the drop-down menu that you created in the previous section of this article. The fields for **Server URL**, **Username**, and **Password** will be automatically populated.
+   * **Container Registry**: Create a new one or choose the container registry from the drop-down menu that you created in the previous section of this article. The fields for **Server URL**, **Username**, and **Password** will be automatically populated.
 
    * **Image and tag**: Specifies the container image name; typically this will use the following syntax: "*registry*.azurecr.io/*appname*:latest", where: 
       * *registry* is your container registry from the previous section of this article 

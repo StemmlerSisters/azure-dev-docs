@@ -28,15 +28,15 @@ highlightedContent:
     - title: Connect apps to Azure services
       itemType: overview
       url: ./intro/connect-to-azure-services.md
+    - title: Develop apps that use Azure AI services
+      itemType: overview
+      url: ./ai/azure-ai-for-developers.md
     - title: Create resources in Azure
       itemType: concept
       url: ./intro/azure-developer-create-resources.md
     - title: Key concepts for building Azure apps
       itemType: architecture
       url: ./intro/azure-developer-key-concepts.md
-    - title: Understand Azure billing
-      itemType: concept
-      url: ./intro/azure-developer-billing.md
     - title: Versioning policy for Azure services, SDKs, and CLI tools
       itemType: concept
       url: ./intro/azure-service-sdk-tool-versioning.md
@@ -46,6 +46,21 @@ productDirectory:
 #  summary:
   items:
     # Card
+    - title: GitHub Copilot for Azure Preview
+      imageSrc: ./github-copilot-azure/media/logo/ghcpa-logo.svg
+      links:
+        - url: ./github-copilot-azure/introduction.md
+          text: What is GitHub Copilot for Azure?
+        - url: ./github-copilot-azure/get-started.md
+          text: Get started
+        - url: ./github-copilot-azure/quickstart-build-deploy-applications.md
+          text: Quickstart
+        - url: ./github-copilot-azure/learn-examples.md
+          text: Get information about Azure and your apps
+        - url: ./github-copilot-azure/deploy-examples.md
+          text: Deploy your apps
+        - url: ./github-copilot-azure/troubleshoot-examples.md
+          text: Troubleshoot your apps
     - title: Python
       imageSrc: /media/logos/logo_python.svg
       links:
@@ -64,6 +79,8 @@ productDirectory:
     - title: JavaScript
       imageSrc: /media/logos/logo_js.svg
       links:
+        - url: ./ai/azure-ai-for-developers.md?pivots=javascript
+          text: Develop Azure AI apps with JavaScript
         - url: /azure/static-web-apps/getting-started?tabs=vanilla-javascript
           text: Develop a static website
         - url: /azure/app-service/tutorial-nodejs-mongodb-app?tabs=azure-portal%2cterminal-bash%2cvscode-deploy%2cdeploy-instructions-azportal%2cdeploy-zip-linux-mac%2cdeploy-instructions--zip-azcli
@@ -72,8 +89,6 @@ productDirectory:
           text: Deploy a serverless application
         - url: ./javascript/tutorial/tutorial-vscode-docker-node/tutorial-vscode-docker-node-01.md?tabs=bash
           text: Deploy Docker containers
-        - url: /azure/cosmos-db/create-mongodb-nodejs
-          text: Migrate a MongoDB app to Azure Cosmos DB
         - url: ./javascript/index.yml
           text: See more in the JavaScript developer center
     - title: Java
@@ -81,11 +96,11 @@ productDirectory:
       links:
         - url: ./java/fundamentals/java-jdk-install.md
           text: Install the JDK for Azure and Azure Stack
-        - url: /azure/spring-apps/quickstart
+        - url: /azure/spring-apps/enterprise/quickstart
           text: Deploy an app to Azure Spring Apps by using the Azure portal
         - url: /azure/app-service/app-service-web-get-started-java
           text: Create a Java app in Azure App Service
-        - url: ./java/spring-framework/configure-spring-boot-starter-java-app-with-azure-active-directory.md
+        - url: ./java/spring-framework/configure-spring-boot-starter-java-app-with-entra.md
           text: Use Spring Boot Starter for Microsoft Entra ID
         - url: ./java/migration/migration-overview.md
           text: Migrate Java Applications to Azure
@@ -106,6 +121,21 @@ productDirectory:
           text: Azure SDK for .NET          
         - url: /dotnet/azure/
           text: See more in the .NET developer center
+    - title: Azure AI for developers
+      imageSrc: ./intro/media/azure-openai.png
+      links:
+        - url: ./ai/azure-ai-for-developers.md
+          text: Overview of AI apps
+        - url: ./python/get-started-app-chat-template.md?toc=/azure/developer/ai/toc.json&bc=/azure/developer/ai/breadcrumb/toc.json
+          text: Chat with your data using Python
+        - url: ./javascript/get-started-app-chat-template.md?toc=/azure/developer/ai/toc.json&bc=/azure/developer/ai/breadcrumb/toc.json
+          text: Chat with your data using JavaScript
+        - url: ./java/ai/get-started-app-chat-template.md?toc=/azure/developer/ai/toc.json&bc=/azure/developer/ai/breadcrumb/toc.json
+          text: Chat with your data using Java
+        - url: /dotnet/ai/get-started-app-chat-template?toc=/azure/developer/ai/toc.json&bc=/azure/developer/ai/breadcrumb/toc.json
+          text: Chat with your data using .NET
+        - url: /azure/ai-services/
+          text: Azure AI services documentation
     - title: Go
       imageSrc: /media/logos/logo_Go-lightblue.svg
       links:
@@ -113,6 +143,8 @@ productDirectory:
           text: Install the Azure SDK for Go
         - url: ./go/azure-sdk-authentication.md
           text: Authenticate your app
+        - url: ./ai/azure-ai-for-developers.md?pivots=go
+          text: Develop Azure AI apps with Go
         - url: /azure/storage/blobs/storage-quickstart-blobs-go
           text: Use Blob storage
         - url: https://github.com/azure-samples/azure-sdk-for-go-samples
@@ -120,7 +152,7 @@ productDirectory:
         - url: ./go/index.yml
           text: See more in the Go developer center
     - title: Azure PowerShell
-      imageSrc: /media/logos/logo_powershell.svg
+      imageSrc: /powershell/media/index/ps_black_128.svg
       links:
         - url: /powershell/azure/new-azureps-module-az
           text: What is the new Az module?
@@ -149,30 +181,19 @@ productDirectory:
           text: Create a virtual machine
         - url: /cli/azure/
           text: See more in the Azure CLI developer center
-    - title: Mobile
-      imageSrc: https://static.docs.com/ui/media/product/azure/devices.svg
-      links:
-        - url: ./mobile-apps/serverless-compute.md
-          text: Build a serverless mobile app
-        - url: /azure/cosmos-db/create-sql-api-xamarin-dotnet
-          text: Save data with Azure Cosmos DB
-        - url: ./mobile-apps/push-notifications.md
-          text: Send push notifications to engage users
-        - url: ./mobile-apps/authentication.md
-          text: Add authentication and manage user identities
-        - url: /azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops
-          text: Key concepts for new Azure Pipelines users
-        - url: ./mobile-apps/index.yml
-          text: See more in the Mobile app developer center
     - title: Azure Developer CLI (azd)
       imageSrc: https://static.docs.com/ui/media/product/azure/azure-developer-cli.svg
       links:
-        - url: ./azure-developer-cli/overview.md
-          text: What is Azure Developer CLI
-        - url: ./azure-developer-cli/install-azd.md
-          text: Get started
-        - url: ./azure-developer-cli/index.yml
-          text: See more in the Azure Developer CLI developer center
+        - url: /azure/developer/azure-developer-cli/overview
+          text: What is the Azure Developer CLI? (azd)
+        - url: /azure/developer/azure-developer-cli/install-azd
+          text: Install azd
+        - url: /azure/developer/azure-developer-cli/get-started
+          text: Deploy an azd template
+        - url: /azure/developer/azure-developer-cli/make-azd-compatible
+          text: Make your project compatible with azd
+        - url: /azure/developer/azure-developer-cli/supported-languages-environments
+          text: Supported languages and environments
     - title: Dev tunnels
       imageSrc: ./dev-tunnels/media/index/dev-tunnels-icon.svg
       links:
@@ -182,6 +203,19 @@ productDirectory:
           text: Get started
         - url: ./dev-tunnels/index.yml
           text: See more in the dev tunnels developer center
+    - title: Dev Proxy
+      imageSrc: ./includes/media/dev-proxy/dev-proxy-icon.svg
+      links:
+        - url: /microsoft-cloud/dev/dev-proxy/overview
+          text: What is Dev Proxy?
+        - url: /microsoft-cloud/dev/dev-proxy/get-started
+          text: Get started
+        - url: /microsoft-cloud/dev/dev-proxy/tutorials/test-javascript-client-side-web-app
+          text: Test a JavaScript client-side web application
+        - url: /microsoft-cloud/dev/dev-proxy/tutorials/test-javascript-client-side-web-app-microsoft-graph
+          text: Test a JavaScript client-side web application that calls Microsoft Graph
+        - url: /microsoft-cloud/dev/dev-proxy/concepts/implement-rate-limiting-azure-api-management
+          text: How to implement rate limiting in Azure API Management
 #tools:
 #conceptualContent:
 # itemType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | whats-new

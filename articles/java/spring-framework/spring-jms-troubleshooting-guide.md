@@ -3,9 +3,9 @@ title: Spring JMS troubleshooting guide
 description: Describes how to troubleshoot known issues and common errors when using Spring JMS.
 ms.date: 08/17/2023
 author: KarlErickson
-ms.author: v-yeyonghui
+ms.author: hangwan
 ms.topic: reference
-ms.custom: devx-track-extended-java
+ms.custom: devx-track-java, devx-track-extended-java
 ---
 
 # Spring JMS troubleshooting guide
@@ -352,7 +352,7 @@ When filing GitHub issues, the following details are requested:
   - What tier is the namespace (standard or premium)?
   - What type of messaging entity is being used (queue or topic)? and its configuration.
   - What is the average size of each Message?
-- What is the traffic pattern like? (that is, the number messages per minute and wehther the Client is always busy or has slow traffic periods.)
+- What is the traffic pattern like? (that is, the number messages per minute and whether the Client is always busy or has slow traffic periods.)
 - Repro code and steps
   - This is important as we often can't reproduce the issue in our environment.
 - Logs
