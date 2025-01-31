@@ -1,15 +1,15 @@
 ---
-title: "Tutorial: Migrate Oracle WebLogic Server to Azure Kubernetes Service within a custom virtual network"
-description: Shows how to deploy WebLogic Server to Azure Kubernetes Service within a custom virtual network.
+title: "Tutorial: Migrate Oracle WebLogic Server to Azure Kubernetes Service (AKS) within a custom virtual network"
+description: Shows how to deploy WebLogic Server to Azure Kubernetes Service (AKS) within a custom virtual network.
 author: KarlErickson
 ms.author: haiche
 ms.topic: conceptual
 ms.date: 08/22/2022
 recommendations: false
-ms.custom: devx-track-java, devx-track-javaee, devx-track-javaee-wls, devx-track-javaee-wls-aks, devx-track-azurecli, devx-track-extended-java
+ms.custom: devx-track-azurecli, devx-track-extended-java, devx-track-java, devx-track-javaee, devx-track-javaee-wls, devx-track-javaee-wls-aks, migration-java
 ---
 
-# Tutorial: Migrate Oracle WebLogic Server to Azure Kubernetes Service within a custom virtual network
+# Tutorial: Migrate Oracle WebLogic Server to Azure Kubernetes Service (AKS) within a custom virtual network
 
 This tutorial shows you how to deploy the Oracle WebLogic Server (WLS) on Azure Kubernetes Service (AKS) offer that integrates with a custom virtual network in the consumer's subscription. The WLS on AKS offer lets you decide whether to create a new virtual network or use an existing one.
 
@@ -23,14 +23,11 @@ In this tutorial, you learn how to:
 
 ## Prerequisites
 
-- [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
-- Use [Azure Cloud Shell](/azure/cloud-shell/quickstart) using the Bash environment; make sure the Azure CLI version is 2.37.0 or above.
-
-   [![Launch Cloud Shell in a new window](../../includes/media/hdi-launch-cloud-shell.png)](https://shell.azure.com)
-
-- If you prefer, [install the Azure CLI 2.37.0 or above](/cli/azure/install-azure-cli) to run Azure CLI commands.
-  - If you're using a local install, sign in with Azure CLI by using the [az login](/cli/azure/reference-index#az-login) command. To finish the authentication process, follow the steps displayed in your terminal. See [Sign in with Azure CLI](/cli/azure/authenticate-azure-cli) for other sign-in options.
-  - When you're prompted, install Azure CLI extensions on first use. For more information about extensions, see [Use extensions with Azure CLI](/cli/azure/azure-cli-extensions-overview).
+- An Azure subscription. [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+- Prepare a local machine with Unix-like operating system installed - for example, Ubuntu, macOS, or Windows Subsystem for Linux.
+- [Install the Azure CLI](/cli/azure/install-azure-cli) 2.37.0 or above to run Azure CLI commands.
+  - Sign in with Azure CLI by using the [az login](/cli/azure/reference-index#az-login) command. To finish the authentication process, follow the steps displayed in your terminal. See [Sign into Azure with Azure CLI](/cli/azure/authenticate-azure-cli#sign-into-azure-with-azure-cli) for other sign-in options.
+  - When you're prompted, install the Azure CLI extension on first use. For more information about extensions, see [Use and manage extensions with the Azure CLI](/cli/azure/azure-cli-extensions-overview).
   - Run [az version](/cli/azure/reference-index?#az-version) to find the version and dependent libraries that are installed. To upgrade to the latest version, run [az upgrade](/cli/azure/reference-index?#az-upgrade).
 - The WLS on AKS marketplace offer requires permission to create user-assign managed identity and assign Azure roles. To assign Azure roles, you must have `Microsoft.Authorization/roleAssignments/write` permissions, such as [User Access Administrator](/azure/role-based-access-control/built-in-roles#user-access-administrator) or [Owner](/azure/role-based-access-control/built-in-roles#owner).
 - An Oracle account. The steps in [Oracle Container Registry](https://aka.ms/wls-aks-ocr) will direct you to accept the license agreement for WebLogic Server images. Make note of your Oracle Account password and email.
@@ -39,7 +36,7 @@ In this tutorial, you learn how to:
 
 Create a resource group with [az group create](/cli/azure/group#az-group-create). This example creates a resource group named `myResourceGroup` in the `eastus` location:
 
-```azurecli-interactive
+```azurecli
 export RESOURCE_GROUP_NAME="myResourceGroup"
 az group create \
     --name ${RESOURCE_GROUP_NAME} \
@@ -57,7 +54,7 @@ The example in this section creates a virtual network with address space `192.16
 
 First, create a virtual network by using [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create). The following example creates a default virtual network named `myVNet`:
 
-```azurecli-interactive
+```azurecli
 az network vnet create \
     --resource-group ${RESOURCE_GROUP_NAME} \
     --name myVNet \
@@ -66,7 +63,7 @@ az network vnet create \
 
 Next, create a subnet by using [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) for the AKS cluster. The following example creates a subnet named `myAKSSubnet`:
 
-```azurecli-interactive
+```azurecli
 az network vnet subnet create \
     --resource-group ${RESOURCE_GROUP_NAME} \
     --name myAKSSubnet \
@@ -76,7 +73,7 @@ az network vnet subnet create \
 
 Next, create a subnet by using [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) for Application Gateway. The following example creates a subnet named `myAppGatewaySubnet`:
 
-```azurecli-interactive
+```azurecli
 az network vnet subnet create \
     --resource-group ${RESOURCE_GROUP_NAME} \
     --name myAppGatewaySubnet \
@@ -86,7 +83,7 @@ az network vnet subnet create \
 
 Next, use the following command to get the AKS subnet resource ID and store it in a variable for use later in this article:
 
-```azurecli-interactive
+```azurecli
 export AKS_SUBNET_ID=$(az network vnet subnet show \
     --resource-group ${RESOURCE_GROUP_NAME} \
     --vnet-name myVNet \
@@ -100,13 +97,13 @@ export AKS_SUBNET_ID=$(az network vnet subnet show \
 Use the following command to create an AKS cluster in your virtual network and subnet by using the [az aks create](/cli/azure/aks#az-aks-create) command.
 
 > [!NOTE]
-> This example creates an AKS cluster using *kubenet* and a system-assigned identity. Azure CLI will grant [Network Contributor](/azure/role-based-access-control/built-in-roles#network-contributor) role to the system-assigned identity after the cluster is created.
+> This example creates an AKS cluster using kubenet and a system-assigned identity. Azure CLI will grant [Network Contributor](/azure/role-based-access-control/built-in-roles#network-contributor) role to the system-assigned identity after the cluster is created.
 >
-> If you want to use *Azure CNI*, see [Configure Azure CNI networking in AKS](/azure/aks/configure-azure-cni) to create an *Azure CNI* enabled AKS cluster.
+> If you want to use Azure CNI, see [Configure Azure CNI networking in AKS](/azure/aks/configure-azure-cni) to create an Azure CNI enabled AKS cluster.
 >
 > If you want to use a user-assigned managed identity, see [Create an AKS cluster with system-assigned managed identities](/azure/aks/configure-kubenet#create-an-aks-cluster-with-user-assigned-managed-identities).
 
-```azurecli-interactive
+```azurecli
 az aks create \
     --resource-group ${RESOURCE_GROUP_NAME} \
     --name myAKSCluster \
@@ -120,11 +117,11 @@ az aks create \
 
 ## Store Java EE applications in a Storage account
 
-You can deploy a Java EE Application along with the WLS on AKS offer deployment. You have to upload the application file (*.war*, *.ear*, or *.jar*) to a pre-existing Azure Storage Account and Storage Container within that account.
+You can deploy a Java EE Application along with the WLS on AKS offer deployment. You have to upload the application file (**.war**, **.ear**, or **.jar**) to a pre-existing Azure Storage Account and Storage Container within that account.
 
 Create an Azure Storage Account using the [az storage account create](/cli/azure/storage/account#az-storage-account-create) command, as shown in the following example:
 
-```azurecli-interactive
+```azurecli
 export STORAGE_ACCOUNT_NAME="stgwlsaks$(date +%s)"
 az storage account create \
     --resource-group ${RESOURCE_GROUP_NAME} \
@@ -136,7 +133,7 @@ az storage account create \
 
 Create a container for storing blobs with the [az storage container create](/cli/azure/storage/container#az-storage-container-create) command. The following example uses the storage account key to authorize the operation to create the container. You can also use your Microsoft Entra account to authorize the operation to create the container. For more information, see [Authorize access to blob or queue data with Azure CLI](/azure/storage/blobs/authorize-data-operations-cli).
 
-```azurecli-interactive
+```azurecli
 export KEY=$(az storage account keys list \
     --resource-group ${RESOURCE_GROUP_NAME} \
     --account-name ${STORAGE_ACCOUNT_NAME} \
@@ -152,7 +149,7 @@ az storage container create \
 
 Next, upload your Java EE application to a blob using the [az storage blob upload](/cli/azure/storage/blob#az-storage-blob-upload) command. The following example uploads the [testwebapp.war](https://aka.ms/wls-aks-testwebapp) test application.
 
-```azurecli-interactive
+```azurecli
 curl -fsL https://aka.ms/wls-aks-testwebapp -o testwebapp.war
 
 az storage blob upload \
@@ -190,7 +187,7 @@ Now that you have an AKS cluster within the virtual network, select the AKS clus
 1. For **Application package (.war,.ear,.jar)**, select **Browse**.
    - Select the storage account you created. The name starts with `stgwlsaks` in this example.
    - Select your container in **Containers** page. This example uses `mycontainer`.
-   - Check your application listed in the container. This example uses *testwebapp.war*.
+   - Check your application listed in the container. This example uses **testwebapp.war**.
    - Select **Select**.
 1. For other fields, keep the default values.
 

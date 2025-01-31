@@ -8,7 +8,7 @@ metadata:
   description:  Curated list of Java learning resources. 
   keywords: ramp up java, learning java, java readiness, java migration, java on Azure
   author: KarlErickson
-  ms.author: sreea
+  ms.author: karler
   ms.date: 03/19/2021
   ms.topic: landing-page
   ms.custom: seo-azure-migrate, devx-track-java, devx-track-extended-java
@@ -52,8 +52,6 @@ landingContent:
     linkLists:
       - linkListType: reference
         links:
-          - text: End-to-End with App Service Linux
-            url: https://github.com/Azure-Samples/e2e-java-experience-in-app-service-linux/tree/master/
           - text: Java scenarios on App Service
             url: https://github.com/Azure-Samples/java-on-app-service
           - text: Scale stateful Java web app on Azure

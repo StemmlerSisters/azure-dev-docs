@@ -3,8 +3,8 @@ title: Create a Linux virtual machines in Azure using Ansible
 description: Learn how to create a Linux virtual machine in Azure using Ansible
 keywords: ansible, azure, devops, virtual machine
 ms.topic: tutorial
-ms.date: 11/08/2021
-ms.custom: devx-track-ansible
+ms.date: 08/14/2024
+ms.custom: devx-track-ansible, linux-related-content
 ---
 
 # Create a Linux virtual machines in Azure using Ansible
@@ -14,7 +14,6 @@ This article presents a sample Ansible playbook for configuring a Linux virtual 
 In this article, you learn how to:
 
 > [!div class="checklist"]
-
 > * Create a resource group
 > * Create a virtual network
 > * Create a public IP address
@@ -103,9 +102,9 @@ In this article, you learn how to:
               key_data: "<key_data>"
           network_interfaces: myNIC
           image:
-            offer: CentOS
-            publisher: OpenLogic
-            sku: '7.5'
+            offer: 0001-com-ubuntu-server-jammy
+            publisher: Canonical
+            sku: 22_04-lts
             version: latest
     ```
 

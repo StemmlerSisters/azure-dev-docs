@@ -1,11 +1,9 @@
 ---
 title: Access data with Azure Cosmos DB NoSQL API
 description: Learn how to configure an application created with the Spring Boot Initializer with Azure Cosmos DB for NoSQL.
-services: cosmos-db
 author: KarlErickson
-ms.author: bbenz
+ms.author: hangwan
 ms.date: 01/18/2023
-ms.service: cosmos-db
 ms.topic: article
 ms.custom: devx-track-java, spring-cloud-azure, devx-track-extended-java
 ---
@@ -26,29 +24,28 @@ Use the following steps to create an Azure Cosmos DB instance:
 
 1. Select **Databases**, and then select **Azure Cosmos DB**.
 
-   :::image type="content" source="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ02.png" alt-text="Screenshot of the Azure portal showing 'Create a resource' page with search box highlighted and containing text 'Azure Cosmos DB'." lightbox="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ02.png":::
+1. On the **Create an Azure Cosmos DB account** screen, select **Azure Cosmos DB for NoSQL**.
 
-1. On the **Select API option** screen, select **Core (SQL)**.
-
-   :::image type="content" source="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ02-01.png" alt-text="Screenshot of the Azure portal showing 'Select API option' page with 'Core SQL' option highlighted." lightbox="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ02-01.png":::
+   :::image type="content" source="media/configure-spring-boot-starter-java-app-with-cosmos-db/azure-cosmos-db-nosql.png" alt-text="Screenshot of the Azure portal that shows the Create an Azure Cosmos DB account page with Azure Cosmos DB for NoSQL option highlighted." lightbox="media/configure-spring-boot-starter-java-app-with-cosmos-db/azure-cosmos-db-nosql.png":::
 
 1. On the **Azure Cosmos DB** page, enter the following information:
 
    * Choose the **Subscription** you want to use for your database.
    * Specify whether to create a new **Resource group** for your database, or choose an existing resource group.
-   * Enter a unique **Account Name**, which you use as the URI for your database. For example: *contosoaccounttest*.
-   * Choose **Core (SQL)** for the API.
+   * Enter a unique **Account Name**, which you use as the URI for your database. For example: **contosoaccounttest**.
    * Specify the **Location** for your database.
+   * Select **Apply Free Tier Discount** if you want to create an account for demonstration purpose only.
+   * Leave the rest of the default options and settings as is.
 
 1. Select **Review + create**, review your specifications, and select **Create**.
 
-   :::image type="content" source="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ03.png" alt-text="Screenshot of the Azure portal showing the 'Create Azure Cosmos DB Account - Core S Q L' page." lightbox="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ03.png":::
+   :::image type="content" source="media/configure-spring-boot-starter-java-app-with-cosmos-db/create-azure-cosmos-db-account.png" alt-text="Screenshot of the Azure portal that shows the Create Azure Cosmos DB Account page with Azure Cosmos DB for NoSQL settings." lightbox="media/configure-spring-boot-starter-java-app-with-cosmos-db/create-azure-cosmos-db-account.png":::
 
 1. When your database has been created, it's listed on your Azure **Dashboard**, and under the **All Resources** and **Azure Cosmos DB** pages. To create a database and a container for a newly created Azure Cosmos DB, see the [Add a database and a container](/azure/cosmos-db/nosql/quickstart-portal#create-container-database) section of [Quickstart: Create an Azure Cosmos DB account, database, container, and items from the Azure portal](/azure/cosmos-db/nosql/quickstart-portal). You can select your database for any of those locations to open the properties page for your cache.
 
 1. When the properties page for your database is displayed, select **Keys** and copy your URI and access keys for your database. You use these values in your Spring Boot application.
 
-   :::image type="content" source="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ05.png" alt-text="Screenshot of the Azure portal of an Azure Cosmos DB account with the Keys page showing." lightbox="media/configure-spring-boot-starter-java-app-with-cosmos-db/AZ05.png":::
+   :::image type="content" source="media/configure-spring-boot-starter-java-app-with-cosmos-db/azure-cosmos-db-keys.png" alt-text="Screenshot of the Azure portal that shows the Azure Cosmos DB account with the Keys page showing." lightbox="media/configure-spring-boot-starter-java-app-with-cosmos-db/azure-cosmos-db-keys.png":::
 
 > [!IMPORTANT]
 > In your newly created Azure Cosmos DB, assign the `Owner` role to the Azure account you're currently using. For more information, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
@@ -68,7 +65,7 @@ Use the following steps to create a new Spring Boot application project with Azu
    * Add **Azure Support** in the dependencies.
 
    > [!NOTE]
-   > The Spring Initializr uses the **Group** and **Artifact** names to create the package name; for example: *com.example.wingtiptoysdata*.
+   > The Spring Initializr uses the **Group** and **Artifact** names to create the package name; for example: **com.example.wingtiptoysdata**.
    >
    > The version of Spring Boot may be higher than the version supported by Azure Support. After the project is automatically generated, you can manually change the Spring Boot version to the highest version supported by Azure, which you can find in [Spring-Versions-Mapping](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping).
 
@@ -80,15 +77,15 @@ Your simple Spring Boot application is now ready for editing.
 
 ## Configure your Spring Boot application to use the Azure Spring Boot Starter
 
-1. Locate the *pom.xml* file in the directory of your app; for example:
+1. Locate the **pom.xml** file in the directory of your app; for example:
 
-   *C:\SpringBoot\wingtiptoysdata\pom.xml*
+   **C:\SpringBoot\wingtiptoysdata\pom.xml**
 
    -or-
 
-   */users/example/home/wingtiptoysdata/pom.xml*
+   **/users/example/home/wingtiptoysdata/pom.xml**
 
-1. Open the *pom.xml* file in a text editor, and add the following to the `<dependencies>` element:
+1. Open the **pom.xml** file in a text editor, and add the following to the `<dependencies>` element:
 
    ```xml
    <dependency>
@@ -100,30 +97,31 @@ Your simple Spring Boot application is now ready for editing.
    > [!NOTE]
    > For more information about how to manage Spring Cloud Azure library versions by using a bill of materials (BOM), see the [Getting started](developer-guide-overview.md#getting-started) section of the [Spring Cloud Azure developer guide](developer-guide-overview.md).
 
-1. Save and close the *pom.xml* file.
+1. Save and close the **pom.xml** file.
 
 ## Configure your Spring Boot application to use your Azure Cosmos DB
 
-1. Locate the *application.properties* file in the *resources* directory of your app; for example:
+1. Locate the **application.properties** file in the **resources** directory of your app; for example:
 
-   *C:\SpringBoot\wingtiptoysdata\src\main\resources\application.properties*
+   **C:\SpringBoot\wingtiptoysdata\src\main\resources\application.properties**
 
    -or-
 
-   */users/example/home/wingtiptoysdata/src/main/resources/application.properties*
+   **/users/example/home/wingtiptoysdata/src/main/resources/application.properties**
 
-1. Open the *application.properties* file in a text editor, and add the following lines to the file, and replace the sample values with the appropriate properties for your database:
+1. Open the **application.properties** file in a text editor, and add the following lines to the file, and replace the sample values with the appropriate properties for your database:
 
    ```properties
    # Specify the DNS URI of your Azure Cosmos DB.
    spring.cloud.azure.cosmos.endpoint=https://contosoaccounttest.documents.azure.com:443/
+   spring.cloud.azure.cosmos.key=your-cosmosdb-account-key
 
    # Specify the name of your database.
    spring.cloud.azure.cosmos.database=contosoaccounttest
    spring.cloud.azure.cosmos.populate-query-metrics=true
    ```
 
-1. Save and close the *application.properties* file.
+1. Save and close the **application.properties** file.
 
 ## Add sample code to implement basic database functionality
 
@@ -131,9 +129,9 @@ In this section, you create two Java classes for storing user data. Then, you mo
 
 ### Define a base class for storing user data
 
-1. Create a new file named *User.java* in the same directory as your main application Java file.
+1. Create a new file named **User.java** in the same directory as your main application Java file.
 
-1. Open the *User.java* file in a text editor, and add the following lines to the file to define a generic user class that stores and retrieve values in your database:
+1. Open the **User.java** file in a text editor, and add the following lines to the file to define a generic user class that stores and retrieve values in your database:
 
    ```java
    package com.example.wingtiptoysdata;
@@ -201,13 +199,13 @@ In this section, you create two Java classes for storing user data. Then, you mo
    }
    ```
 
-1. Save and close the *User.java* file.
+1. Save and close the **User.java** file.
 
 ### Define a data repository interface
 
-1. Create a new file named *UserRepository.java* in the same directory as your main application Java file.
+1. Create a new file named **UserRepository.java** in the same directory as your main application Java file.
 
-1. Open the *UserRepository.java* file in a text editor, and add the following lines to the file to define a user repository interface that extends the default `ReactiveCosmosRepository` interface:
+1. Open the **UserRepository.java** file in a text editor, and add the following lines to the file to define a user repository interface that extends the default `ReactiveCosmosRepository` interface:
 
    ```java
    package com.example.wingtiptoysdata;
@@ -224,7 +222,7 @@ In this section, you create two Java classes for storing user data. Then, you mo
 
    The `ReactiveCosmosRepository` interface replaces the `DocumentDbRepository` interface from the previous version of the starter. The new interface provides synchronous and reactive APIs for basic save, delete, and find operations.
 
-1. Save and close the *UserRepository.java* file.
+1. Save and close the **UserRepository.java** file.
 
 ### Modify the main application class
 
@@ -305,7 +303,7 @@ In this section, you create two Java classes for storing user data. Then, you mo
 
 ## Build and test your app
 
-1. Open a command prompt and navigate to the folder where your *pom.xml* file is located; for example:
+1. Open a command prompt and navigate to the folder where your **pom.xml** file is located; for example:
 
    `cd C:\SpringBoot\wingtiptoysdata`
 

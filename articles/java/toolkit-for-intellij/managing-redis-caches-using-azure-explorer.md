@@ -4,7 +4,6 @@ description: Learn how to manage your Azure Redis caches by using the Azure Expl
 ms.date: 03/14/2022
 author: KarlErickson
 ms.author: jialuogan
-ms.service: azure-java
 ms.topic: article
 ms.custom: devx-track-java, devx-track-extended-java
 ---
@@ -41,9 +40,9 @@ The following steps walk you through the steps to create a Redis cache using the
 
    * **Instance details**:
 
-      * **DNS Name**: Specifies the DNS subdomain for the new Redis cache, which is prepended to ".redis.cache.windows.net" (for example: *wingtiptoys.redis.cache.windows.net*).
+      * **DNS Name**: Specifies the DNS subdomain for the new Redis cache, which is prepended to ".redis.cache.windows.net" - for example, **wingtiptoys.redis.cache.windows.net**.
 
-      * **Location**: Specifies the location where your Redis cache is created (for example, *West US*).
+      * **Location**: Specifies the location where your Redis cache is created - for example, **West US**.
 
       * **Pricing Tier**: Specifies which pricing tier your Redis cache uses. This setting determines the number of client connections. (For more information, see [Redis Cache Pricing].)
 
@@ -98,7 +97,7 @@ For more information about Azure Redis caches, configuration settings and pricin
 [Azure Cache for Redis management FAQs]: /azure/azure-cache-for-redis/cache-management-faq
 [Redis Cache Documentation]: /azure/redis-cache
 [How to configure Azure Redis Cache]: /azure/redis-cache/cache-configure
-[Sign In Instructions for the Azure Toolkit for IntelliJ]: ./sign-in-instructions.md
+[Sign-in instructions for the Azure Toolkit for IntelliJ]: ./sign-in-instructions.md
 
 <!-- IMG List -->
 
