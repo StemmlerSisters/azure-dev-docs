@@ -5,7 +5,7 @@ author: mcleanbyron
 ms.author: mcleans
 ms.service: azure
 ms.topic: overview
-ms.date: 02/24/2023
+ms.date: 11/17/2024
 ---
 
 # Versioning policy for Azure services, SDKs, and CLI tools
@@ -20,7 +20,9 @@ Each published version of an API is identified by a date value in `YYYY-MM-DD` f
 
 All API operations require clients to specify a valid API version for the service via the `api-version` query string parameter in the URL. For example: `https://management.azure.com/subscriptions?api-version=2020-01-01`. Client SDKs and tools include the `api-version` value automatically. For more considerations, see the [Client SDKs and service versions](#client-sdks-and-service-versions) section later in this article.
 
-Usually, published service versions remain available and supported for many years, even as newer versions become available. In most cases, the only time you should adopt a new service version within existing code is to take advantage of new features.
+In most scenarios, a service client will only need to interact with a single version of a service to access all of the functionality it requires.
+
+Stable service versions generally remain available and supported for many years, even as newer versions become available. In most cases, the only time you should adopt a new service version within existing code is to take advantage of new features.
 
 ### Stable versions
 
@@ -31,6 +33,10 @@ Most service versions published are *stable versions*. Stable versions are backw
 A *breaking change version* of a service isn't backwards compatible. Adopting a breaking change version in existing client code may require code changes to ensure the client behaves exactly as it did when targeting the previous version.
 
 Breaking change versions are rare, announced via documentation, and are typically preceded by publication of a preview version. Publication of a breaking change version may prompt the eventual retirement of existing stable versions, which will remain available for at least three years after the breaking change version releases. For breaking changes published due to security or compliance issues, existing stable service versions may remain available for one year or less depending on the severity of the issue.
+
+Due to the rapid innovation and developments in AI, AI-driven services may have a reduced minimum availability of one year. Each service will publish its breaking change policy.
+
+Any Azure service dependent on a non-Microsoft component can shrink its support policy to match that of the component's policy. Any breaking change due to this will link to the component vendor's policy showing the date when the component is no longer supported.
 
 ### Preview versions
 
@@ -59,3 +65,4 @@ The Azure command line tools may occasionally expose preview features. These com
 - [Azure REST API specifications](https://github.com/Azure/azure-rest-api-specs)
 - [Microsoft REST API guidelines](https://github.com/microsoft/api-guidelines)
 - [Azure SDK general guidelines](https://azure.github.io/azure-sdk/general_introduction.html)
+

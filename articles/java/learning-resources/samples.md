@@ -2,10 +2,10 @@
 title: Azure samples for Java
 description: Java readiness - Azure samples for Java developers.
 author: KarlErickson
-ms.author: sreea
+ms.author: karler
 ms.topic: article
 ms.date: 01/05/2023
-ms.custom: devx-track-java, devx-track-javaee, devx-track-javaee-liberty-aks, devx-track-javaee-liberty-aro, devx-track-extended-java
+ms.custom: devx-track-extended-java, devx-track-java, devx-track-javaee, devx-track-javaee-jbosseap-appsvc, devx-track-javaee-liberty-aks, devx-track-javaee-liberty-aro
 ---
 
 # Java on Azure Samples
@@ -16,7 +16,6 @@ This topic provides links to samples that demonstrate key scenarios for Java app
 
 The following samples demonstrate end-to-end Java on Azure experiences.
 
-- [App Service Linux](https://github.com/Azure-Samples/e2e-java-experience-in-app-service-linux/tree/master/)
 - [Azure Spring Apps](https://github.com/Azure-Samples/azure-spring-cloud)
 - [Deploy web app using GitHub actions](https://github.com/Azure-Samples/Java-application-petstore-ee7)
 - [Jakarta EE on Azure Red Hat OpenShift](https://github.com/Azure-Samples/jboss-on-aro-jakartaee)

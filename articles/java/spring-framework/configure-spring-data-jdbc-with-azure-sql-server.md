@@ -1,15 +1,11 @@
 ---
 title: Use Spring Data JDBC with Azure SQL Database
 description: Learn how to use Spring Data JDBC with an Azure SQL Database.
-documentationcenter: java
-ms.date: 04/06/2023
-ms.service: sql-database
-ms.tgt_pltfrm: multiple
+ms.date: 08/28/2024
 author: KarlErickson
-ms.author: judubois
+ms.author: hangwan
 ms.topic: article
 ms.custom: devx-track-java, devx-track-azurecli, team=cloud_advocates, spring-cloud-azure, passwordless-java, devx-track-extended-java
-ms.contributors: judubois-01202022
 ---
 
 # Use Spring Data JDBC with Azure SQL Database
@@ -43,7 +39,7 @@ In this tutorial, you'll code a sample application. If you want to go faster, th
 
 With an Azure SQL Database instance, you can store data by using Spring Cloud Azure.
 
-To install the Spring Cloud Azure Starter module, add the following dependencies to your *pom.xml* file:
+To install the Spring Cloud Azure Starter module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -53,7 +49,7 @@ To install the Spring Cloud Azure Starter module, add the following dependencies
       <dependency>
         <groupId>com.azure.spring</groupId>
         <artifactId>spring-cloud-azure-dependencies</artifactId>
-        <version>4.12.0</version>
+        <version>5.19.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -62,8 +58,9 @@ To install the Spring Cloud Azure Starter module, add the following dependencies
   ```
 
   > [!NOTE]
-  > If you're using Spring Boot 3.x, be sure to set the `spring-cloud-azure-dependencies` version to `5.6.0`.
-  > For more information about the `spring-cloud-azure-dependencies` version, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Cloud Azure Starter artifact:
 
@@ -74,11 +71,14 @@ To install the Spring Cloud Azure Starter module, add the following dependencies
   </dependency>
   ```
 
+  > [!NOTE]
+  > As this is a dependency, it should be added in the `<dependencies>` section of the **pom.xml**. Its version is not configured here, as it is managed by the BOM that we added previously.
+
 ### Configure Spring Boot to use Azure SQL Database
 
 To store data from Azure SQL Database using Spring Data JDBC, follow these steps to configure the application:
 
-1. Configure an Azure SQL Database credentials in the *application.properties* configuration file.
+1. Configure an Azure SQL Database credentials in the **application.properties** configuration file.
 
    #### [Passwordless (Recommended)](#tab/passwordless)
 
@@ -106,10 +106,10 @@ To store data from Azure SQL Database using Spring Data JDBC, follow these steps
     ---
 
    > [!WARNING]
-   > The configuration property `spring.sql.init.mode=always` means that Spring Boot will automatically generate a database schema, using the *schema.sql* file that you'll create next, each time the server is started. This is great for testing, but remember that this will delete your data at each restart, so you shouldn't use it in production.
+   > The configuration property `spring.sql.init.mode=always` means that Spring Boot will automatically generate a database schema, using the **schema.sql** file that you'll create next, each time the server is started. This is great for testing, but remember that this will delete your data at each restart, so you shouldn't use it in production.
 
 <!-- NOTE: The numbering must start with 2 here to continue the sequence after the previous step, otherwise the numbering will reset to 1. -->
-2. Create the *src/main/resources/schema.sql* configuration file to configure the database schema, then add the following contents.
+2. Create the **src/main/resources/schema.sql** configuration file to configure the database schema, then add the following contents.
 
    ```sql
    DROP TABLE IF EXISTS todo;

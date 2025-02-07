@@ -109,7 +109,7 @@ The following tools provide static analysis for Terraform files:
 - [Checkov](https://github.com/bridgecrewio/checkov/)
 - [Terrascan](https://github.com/accurics/terrascan)
 - [tfsec](https://github.com/tfsec/tfsec)
-- [Deepsource](https://deepsource.io/blog/release-terraform-static-analysis/) 
+- [Deepsource](https://deepsource.com/blog/release-terraform-static-analysis) 
 
 Static analysis is often executed part of a continuous integration pipeline. These tests don't require the creation of an execution plan or deployment. As a result, they run faster than other tests and are generally run first in the continuous integration process.
 
@@ -135,7 +135,7 @@ Continuous integration involves testing an entire system when a change is introd
     - This script is responsible for running Checkov in the Terraform workspace mounted inside a Docker container. Microsoft-managed agents are Docker enabled. Running tools inside a Docker container is easier and removes the need to install Checkov on the Azure Pipeline agent.
     - The `$(terraformWorkingDirectory)` variable is defined in the `azure-pipeline.yaml` file.
 
-1. Review the line that reads, **Step 2: install Terraform on the Azure Pipelines agent**. The [Terraform Build & Release Task extension](https://marketplace.visualstudio.com/items?itemName=charleszipp.azure-pipelines-tasks-terraform) that you installed earlier has a command to install Terraform on the agent running the Azure Pipeline. This task is what is being done in this step.
+1. Review the line that reads, **Step 2: install Terraform on the Azure Pipelines agent**. The [Terraform Build & Release Task extension](https://marketplace.visualstudio.com/items?itemName=JasonBJohnson.azure-pipelines-tasks-terraform) that you installed earlier has a command to install Terraform on the agent running the Azure Pipeline. This task is what is being done in this step.
 
     ```yaml
     - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0

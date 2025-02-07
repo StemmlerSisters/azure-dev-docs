@@ -59,6 +59,12 @@
       "branch_mapping": {}
     },
     {
+      "path_to_root": "node-essentials",
+      "url": "https://github.com/MicrosoftDocs/node-essentials",
+      "branch": "main",
+      "branch_mapping": {}
+    },    
+    {
       "path_to_root": "js-e2e-azure-function-upload-file",
       "url": "https://github.com/Azure-Samples/js-e2e-azure-function-upload-file",
       "branch": "main",
@@ -179,12 +185,6 @@
       "branch_mapping": {}
     },
     {
-      "path_to_root": "azure-docs-pr",
-      "url": "https://github.com/MicrosoftDocs/azure-docs-pr",
-      "branch": "main",
-      "branch_mapping": {}
-    },
-    {
       "path_to_root": "msdocs-python-flask-webapp-quickstart",
       "url": "https://github.com/Azure-Samples/msdocs-python-flask-webapp-quickstart",
       "branch": "main",
@@ -223,6 +223,12 @@
     {
       "path_to_root": "msdocs-python-fastapi-webapp-quickstart",
       "url": "https://github.com/Azure-Samples/msdocs-python-fastapi-webapp-quickstart",
+      "branch": "main",
+      "branch_mapping": {}
+    },
+    {
+      "path_to_root": "dotnet-docs",
+      "url": "https://github.com/dotnet/docs",
       "branch": "main",
       "branch_mapping": {}
     }

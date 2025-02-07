@@ -1,11 +1,9 @@
 ---
 title: Installing the Azure Toolkit for Eclipse
 description: Learn how to install the Azure Toolkit for Eclipse plug-in to create and deploy cloud applications to Azure.
-documentationcenter: java
-ms.assetid: 9e93ff6a-f42b-4d99-b55b-624136b4a730
+author: KarlErickson
+ms.author: jialuogan
 ms.date: 11/19/2021
-ms.service: azure-java
-ms.tgt_pltfrm: multiple
 ms.topic: article
 ms.custom: devx-track-java, devx-track-extended-java
 ---
@@ -26,11 +24,7 @@ There are two methods of installing the Azure Toolkit for Eclipse: by accessing 
 
 ## Eclipse Marketplace
 
-The Eclipse Marketplace wizard in the Eclipse IDE allows users to browse the [Eclipse Marketplace](https://marketplace.eclipse.org/) and install solutions. The following two options take you to the Eclipse Marketplace:
-
-- Drag the following button to your running Eclipse workspace. This button opens the Eclipse Marketplace with the Azure Toolkit for Eclipse already selected.
-
-   [![Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client](https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.png)](http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1919278 "Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client")
+The Eclipse Marketplace wizard in the Eclipse IDE allows users to browse the [Eclipse Marketplace](https://marketplace.eclipse.org/) and install solutions. The following option takes you to the Eclipse Marketplace:
 
 - On the Eclipse IDE, click the **Help** menu, navigate to **Eclipse Marketplace**, search for "Azure Toolkit for Eclipse", and click **Install**.
 
@@ -58,7 +52,7 @@ The Eclipse Marketplace wizard in the Eclipse IDE allows users to browse the [Ec
 
 ## Install new software
 
-You can install the Azure Toolkit for Eclipse directly from the *Help* menu in the form of new software.
+You can install the Azure Toolkit for Eclipse directly from the **Help** menu in the form of new software.
 
 1. Click the **Help** menu, and then click **Install New Software**.
 

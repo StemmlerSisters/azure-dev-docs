@@ -2,8 +2,8 @@
 title: Use Azure Storage Queue in Spring applications
 description: This article demonstrates how to use Azure Storage Queue in Java applications built with Spring framework.
 author: KarlErickson
-ms.author: v-yeyonghui
-ms.date: 04/06/2023
+ms.author: hangwan
+ms.date: 08/28/2024
 ms.topic: article
 ms.custom: devx-track-java, spring-cloud-azure, passwordless-java, devx-track-extended-java
 ---
@@ -42,7 +42,7 @@ The Spring Cloud Azure Storage Queue Starter module imports [Azure Storage Queue
 
 ### Add dependencies
 
-To install the Spring Cloud Azure Storage Queue Starter module, add the following dependencies to your *pom.xml* file:
+To install the Spring Cloud Azure Storage Queue Starter module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -52,13 +52,18 @@ To install the Spring Cloud Azure Storage Queue Starter module, add the followin
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.12.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Cloud Azure Queue Storage Queue artifact:
 
@@ -150,7 +155,7 @@ To send messages to and receive messages from Azure Storage queues, use the foll
 
 You can build the client beans by yourself, but the process is complicated. In Spring Boot applications, you have to manage properties, learn the builder pattern, and register the clients to your Spring application context. The following steps show you how to do that.
 
-1. Build the client programmatically in your Spring application, as shown in the following example. Be sure to replace the *`<storage-account-name>`* placeholder with your own value.
+1. Build the client programmatically in your Spring application, as shown in the following example. Be sure to replace the `<storage-account-name>` placeholder with your own value.
 
    ```java
    import com.azure.identity.DefaultAzureCredentialBuilder;
@@ -205,7 +210,7 @@ You can build the client beans by yourself, but the process is complicated. In S
 The following list shows reasons why this code isn't flexible or graceful:
 
 - The storage account and queue names are hard coded.
-- If you use `@Value` to get configurations from the Spring environment, you can't have IDE hints in your *application.properties* file.
+- If you use `@Value` to get configurations from the Spring environment, you can't have IDE hints in your **application.properties** file.
 - If you have a microservice scenario, you must duplicate the code in each project, and it's easy to make mistakes and hard to be consistent.
 
 Fortunately, building the client beans by yourself isn't necessary with Spring Cloud Azure. Instead, you can directly inject them and use the configuration properties that you're already familiar with to configure the storage queue. For more information, see [Spring Cloud Azure configuration properties](configuration-properties-all.md).
@@ -227,7 +232,7 @@ The following sections show you how to use Spring Messaging Azure Storage Queue 
 
 ### Add dependencies
 
-To install the Spring Messaging Azure Storage Queue module, add the following dependencies to your *pom.xml* file:
+To install the Spring Messaging Azure Storage Queue module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -237,13 +242,18 @@ To install the Spring Messaging Azure Storage Queue module, add the following de
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.12.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Cloud Azure starter and Spring Messaging Storage Queue artifacts:
 
@@ -268,7 +278,7 @@ Use the following steps to configure and code your application:
    spring.cloud.azure.storage.queue.account-name=<your-storage-account-name>
    ```
 
-1. Wire up a sender and a receiver to send and receive messages with Spring, as shown in the following example. Be sure to replace the *`<storage-queue-name>`* placeholder with your own value.
+1. Wire up a sender and a receiver to send and receive messages with Spring, as shown in the following example. Be sure to replace the `<storage-queue-name>` placeholder with your own value.
 
    ```java
    import com.azure.spring.messaging.AzureHeaders;
@@ -329,7 +339,7 @@ The following sections show you how to use Spring Integration Azure Storage Queu
 
 ### Add dependencies
 
-To install the Spring Integration Azure Storage Queue module, add the following dependencies to your *pom.xml* file:
+To install the Spring Integration Azure Storage Queue module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -339,13 +349,18 @@ To install the Spring Integration Azure Storage Queue module, add the following 
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.12.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Integration Azure Storage Queue artifacts:
 
@@ -366,7 +381,7 @@ Use the following steps to configure and code your application:
    spring.cloud.azure.storage.queue.account-name=<your-storage-account-name>
    ```
 
-1. Create a new `QueueReceiveConfiguration` Java class as shown in the following example. This class is used to define a message receiver. Be sure to replace the *`<storage-queue-name>`* placeholder with your own value.
+1. Create a new `QueueReceiveConfiguration` Java class as shown in the following example. This class is used to define a message receiver. Be sure to replace the `<storage-queue-name>` placeholder with your own value.
 
    ```java
    import com.azure.spring.integration.storage.queue.inbound.StorageQueueMessageSource;
@@ -404,7 +419,7 @@ Use the following steps to configure and code your application:
    }
    ```
 
-1. Create a new `QueueSendConfiguration` Java class as shown in the following example. This class is used to define a message sender. Be sure to replace the *`<storage-queue-name>`* placeholder with your own value.
+1. Create a new `QueueSendConfiguration` Java class as shown in the following example. This class is used to define a message sender. Be sure to replace the `<storage-queue-name>` placeholder with your own value.
 
    ```java
    import com.azure.spring.integration.core.handler.DefaultMessageHandler;

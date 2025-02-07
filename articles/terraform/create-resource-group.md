@@ -2,11 +2,14 @@
 title: 'Quickstart: Create an Azure resource group using Terraform'
 description: In this article, you learn how to create an Azure resource group using Terraform
 ms.topic: quickstart
-ms.date: 10/11/2023
+service: azure
+ms.service: azure
+ms.date: 10/26/2023
 ms.custom: devx-track-terraform
 adobe-target: true
 content_well_notification: 
   - AI-contribution
+ai-usage: ai-assisted
 ---
 
 # Quickstart: Create an Azure resource group using Terraform

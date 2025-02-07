@@ -2,9 +2,9 @@
 title: Azure Cosmos DB dev guide
 description: This guide describes the features, issues, workarounds, and diagnostic steps to be aware of when you use the Spring Data Azure Cosmos DB SDK.
 author: KarlErickson
-ms.author: seal
+ms.author: hangwan
 ms.topic: conceptual
-ms.date: 01/18/2023
+ms.date: 08/28/2024
 ms.custom: devx-track-java, spring-cloud-azure, devx-track-extended-java
 ---
 
@@ -121,6 +121,10 @@ For more information, see the [test here section][address_repository_it_test].
 
 `Azure-spring-data-cosmos` supports [Spring Data custom queries][spring_data_custom_query], for example, a find operation such as `findByAFieldAndBField`. It also supports [Spring Data Pageable, Slice and Sort][spring-data-pageable-slice-sort]. For more information, see the [query, pageable and sorting section][spring-data-custom-query-pageable-and-sorting].
 
+### Using Azure Cosmos DB Java SDK through Spring Data Cosmos
+
+`Azure-spring-data-cosmos` supports using `Azure Cosmos DB Java SDK`. Users can get `CosmosClient` or `CosmosAsyncClient` bean through `ApplicationContext` and execute any operations supported by Azure Cosmos DB Java SDK. For more information, see the [using Azure Cosmos Client through Spring Data Cosmos section][using-azure-cosmos-db-java-sdk-through-spring-data-cosmos].
+
 ### Spring Data REST
 
 `Azure-spring-data-cosmos` supports [Spring Data REST](https://spring.io/projects/spring-data-rest/). For more information, see the [Azure Spring Data Azure Cosmos DB REST API section][spring-boot-starter-data-rest].
@@ -171,7 +175,7 @@ This project welcomes contributions and suggestions. Most contributions require 
 to use your contribution.
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate
-the PR appropriately (for example, label, comment). Simply follow the instructions provided by the bot. You'll only need to
+the PR appropriately - for example, label, comment. Simply follow the instructions provided by the bot. You'll only need to
 do this once across all repos using our CLA.
 
 This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For more information, see the [Code of Conduct FAQ][coc_faq]
@@ -189,8 +193,8 @@ or contact [opencode@microsoft.com][coc_contact] with any other questions or com
 [coc_contact]: mailto:opencode@microsoft.com
 [azure_subscription]: https://azure.microsoft.com/free/
 [samples]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-data-cosmos/src/samples/java/com/azure/spring/data/cosmos
-[sample-for-multi-database]: https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/cosmos/azure-spring-data-cosmos/spring3-samples/cosmos-multi-database-multi-account
-[sample-for-multi-database-single-account]: https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/cosmos/azure-spring-data-cosmos/spring3-samples/cosmos-multi-database-single-account
+[sample-for-multi-database]: https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/cosmos/azure-spring-data-cosmos/cosmos-multi-database-multi-account
+[sample-for-multi-database-single-account]: https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/cosmos/azure-spring-data-cosmos/cosmos-multi-database-single-account
 [sql_api_query]: /azure/cosmos-db/sql-api-sql-query
 [local_emulator]: /azure/cosmos-db/local-emulator
 [local_emulator_export_ssl_certificates]: /azure/cosmos-db/local-emulator-export-ssl-certificates
@@ -226,6 +230,7 @@ or contact [opencode@microsoft.com][coc_contact] with any other questions or com
 [optimistic-locking]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-data-cosmos/README.md#optimistic-locking
 [spring-data-pageable-slice-sort]: https://docs.spring.io/spring-data/commons/docs/current/reference/html/#repositories.special-parameters
 [spring-data-custom-query-pageable-and-sorting]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-data-cosmos/README.md#spring-data-custom-query-pageable-and-sorting
+[using-azure-cosmos-db-java-sdk-through-spring-data-cosmos]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-data-cosmos/README.md#using-azure-cosmos-db-java-sdk-through-spring-data-cosmos
 [spring-boot-starter-data-rest]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-data-cosmos/README.md#spring-boot-starter-data-rest
 [spring-data-cosmos-auditing]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-data-cosmos/README.md#auditing
 [multi-database-configuration]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/spring/azure-spring-data-cosmos/README.md#multi-database-configuration

@@ -3,14 +3,14 @@ title: Spring Cloud Azure PostgreSQL support
 description: This article describes how Spring Cloud Azure and Azure PostgreSQL can be used together.
 ms.date: 04/06/2023
 author: KarlErickson
-ms.author: v-yeyonghui
+ms.author: hangwan
 ms.topic: reference
 ms.custom: devx-track-java, devx-track-extended-java
 ---
 
 # Spring Cloud Azure PostgreSQL support
 
-**This article applies to:** ✔️ Version 4.12.0 ✔️ Version 5.6.0
+**This article applies to:** ✅ Version 4.19.0 ✅ Version 5.19.0
 
 [Azure Database for PostgreSQL](https://azure.microsoft.com/services/postgresql/) is a relational database service based on the open-source Postgres database engine. It's a fully managed database-as-a-service that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability.
 
@@ -40,7 +40,7 @@ If none of these types of credentials are found, the `DefaultAzureCredential` cr
 
 The following high-level diagram summarizes how authentication works using OAuth credential authentication with Azure Database for PostgreSQL. The arrows indicate communication pathways.
 
-:::image type="content" source="media/spring-cloud-azure/authentication-postgresql-azure-active-directory.png" alt-text="Diagram showing Microsoft Entra authentication for PostgreSQL ." border="false":::
+:::image type="content" source="media/spring-cloud-azure/authentication-postgresql-entra-id.png" alt-text="Diagram showing Microsoft Entra authentication for PostgreSQL ." border="false":::
 
 ## Configuration
 
@@ -60,12 +60,12 @@ The following table shows the Spring Cloud Azure for PostgreSQL common configura
 > | spring.datasource.azure.credential.client-certificate-path            | Path of a PEM certificate file to use when performing service principal authentication with Azure.                                                                                                     |
 > | spring.datasource.azure.credential.client-id                          | Client ID to use when performing service principal authentication with Azure. This is a legacy property.                                                                                               |
 > | spring.datasource.azure.credential.client-secret                      | Client secret to use when performing service principal authentication with Azure. This is a legacy property.                                                                                           |
-> | spring.datasource.azure.credential.managed-identity-enabled           | Whether to enable managed identity to authenticate with Azure. If *true* and the `client-id` is set, will use the client ID as user assigned managed identity client ID. The default value is *false*. |
+> | spring.datasource.azure.credential.managed-identity-enabled           | Whether to enable managed identity to authenticate with Azure. If `true` and the `client-id` is set, will use the client ID as user assigned managed identity client ID. The default value is `false`. |
 > | spring.datasource.azure.credential.password                           | Password to use when performing username/password authentication with Azure.                                                                                                                           |
 > | spring.datasource.azure.credential.username                           | Username to use when performing username/password authentication with Azure.                                                                                                                           |
 > | spring.datasource.azure.profile.cloud-type                            | Name of the Azure cloud to connect to.                                                                                                                                                                 |
 > | spring.datasource.azure.profile.environment.active-directory-endpoint | The Microsoft Entra endpoint to connect to.                                                                                                                                                     |
-> | spring.datasource.azure.profile.tenant-id                             | Tenant ID for Azure resources.                                                                                                                                                                         |
+> | spring.datasource.azure.profile.tenant-id                             | Tenant ID for Azure resources. The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID.                                                                                                                                              |
 
 ## Dependency setup
 
@@ -94,7 +94,7 @@ The following sections show the classic Spring Boot application usage scenarios.
 
 1. To create users and grant permission, see the [Create a PostgreSQL non-admin user and grant permission](configure-spring-data-jdbc-with-azure-postgresql.md#create-a-postgresql-non-admin-user-and-grant-permission) section of [Use Spring Data JDBC with Azure Database for PostgreSQL](configure-spring-data-jdbc-with-azure-postgresql.md).
 
-1. Configure the following properties in your *application.yml* file:
+1. Configure the following properties in your **application.yml** file:
 
    ```yaml
    spring:
@@ -109,7 +109,7 @@ The following sections show the classic Spring Boot application usage scenarios.
 
 1. Assign role to service principal:
 
-   1. Create a SQL script called *create_ad_user_sp.sql* for creating a non-admin user. Add the following contents and save it locally:
+   1. Create a SQL script called **create_ad_user_sp.sql** for creating a non-admin user. Add the following contents and save it locally:
 
       > [!IMPORTANT]
       > Make sure `<service-principal-name>` already exists in your Microsoft Entra tenant, or you won't be able to create the non-admin user.
@@ -132,7 +132,7 @@ The following sections show the classic Spring Boot application usage scenarios.
       rm create_ad_user_sp.sql
       ```
 
-1. Configure the following properties in your *application.yml* file:
+1. Configure the following properties in your **application.yml** file:
 
    ```yaml
    spring:
@@ -142,7 +142,7 @@ The following sections show the classic Spring Boot application usage scenarios.
            client-id: ${AZURE_CLIENT_ID}
            client-secret: ${AZURE_CLIENT_SECRET}
          profile:
-           tenant-id: ${AZURE_TENANT_ID}
+           tenant-id: <tenant>
      datasource:
        url: jdbc:postgresql://${AZ_DATABASE_SERVER_NAME}.postgres.database.azure.com:5432/${AZ_DATABASE_NAME}?sslmode=require
        username: ${AZ_POSTGRESQL_AD_SP_USERNAME}
@@ -150,13 +150,16 @@ The following sections show the classic Spring Boot application usage scenarios.
          passwordless-enabled: true
    ```
 
+> [!NOTE]
+> The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID. For more information about these values, see the [Used the wrong endpoint (personal and organization accounts)](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist#cause-3-used-the-wrong-endpoint-personal-and-organization-accounts) section of [Error AADSTS50020 - User account from identity provider does not exist in tenant](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist). For information on converting your single-tenant app, see [Convert single-tenant app to multitenant on Microsoft Entra ID](/entra/identity-platform/howto-convert-app-to-be-multi-tenant).
+
 ### Connect to Azure PostgreSQL with Managed Identity in Azure Spring Apps
 
 1. To enable managed identity, see the [Assign the managed identity using the Azure portal](migrate-postgresql-to-passwordless-connection.md#assign-the-managed-identity-using-the-azure-portal) section of [Migrate an application to use passwordless connections with Azure Database for PostgreSQL](migrate-postgresql-to-passwordless-connection.md).
 
 1. To grant permissions, see the [Assign roles to the managed identity](migrate-postgresql-to-passwordless-connection.md#assign-roles-to-the-managed-identity) section of [Migrate an application to use passwordless connections with Azure Database for PostgreSQL](migrate-postgresql-to-passwordless-connection.md).
 
-1. Configure the following properties in your *application.yml* file:
+1. Configure the following properties in your **application.yml** file:
 
    ```yaml
    spring:

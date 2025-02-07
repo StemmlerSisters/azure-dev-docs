@@ -3,7 +3,7 @@ title: Customize your Azure Developer CLI workflows using command and event hook
 description: Explores how to use Azure Developer CLI hooks to customize deployment pipelines
 author: alexwolfmsft
 ms.author: alexwolf
-ms.date: 1/27/2023
+ms.date: 9/13/2024
 ms.topic: reference
 ms.custom: devx-track-azdevcli
 ms.service: azure-dev-cli
@@ -11,7 +11,7 @@ ms.service: azure-dev-cli
 
 # Customize your Azure Developer CLI workflows using command and event hooks
 
-The Azure Developer CLI supports various extension points to customize your workflows and deployments. The hooks middleware allows you to execute custom scripts before and after `azd` commands and service lifecycle events. hooks follow a naming convention using *pre* and *post* prefixes on the matching `azd` command or service event name. 
+The Azure Developer CLI supports various extension points to customize your workflows and deployments. The hooks middleware allows you to execute custom scripts before and after `azd` commands and service lifecycle events. hooks follow a naming convention using *pre* and *post* prefixes on the matching `azd` command or service event name.
 
 For example, you may want to run a custom script in the following scenarios:
 
@@ -32,6 +32,7 @@ The following `azd` command hooks are available:
 The following service lifecycle event hooks are available:
 
 * `prerestore` and `postrestore`: Run before and after the service packages and dependencies are restored.
+* `prebuild` and `postbuild`: Run before and after the service source code or container is built.
 * `prepackage` and `postpackage`: Run before and after the app is packaged for deployment.
 * `predeploy` and `postdeploy`: Run before and after the service code is deployed to Azure.
 
@@ -39,11 +40,11 @@ The following service lifecycle event hooks are available:
 
 Hooks can be registered in your `azure.yaml` file at the root or within a specific service configuration. All types of hooks support the following configuration options:
 
-* `shell`: `sh` | `pwsh` (automatically inferred from run if not specified).
+* `shell`: `sh` | `pwsh`
   * *Note*: PowerShell 7 is required for `pwsh`.
 * `run`: Define an inline script or a path to a file.
 * `continueOnError`: When set will continue to execute even after a script error occurred during a command hook (default false).
-* `interactive`: When set will bind the running script to the console `stdin`, `stdout` & `stderr` (default false). This property need to be set to `true` in order to see the hook's output.
+* `interactive`: When set will bind the running script to the console `stdin`, `stdout` & `stderr` (default false).
 * `windows`: Specifies that the nested configurations will only apply on windows OS. If this configuration option is excluded, the hook executes on all platforms.
 * `posix`: Specifies that the nested configurations will only apply to POSIX based OSes (Linux & MaxOS). If this configuration option is excluded, the hook executes on all platforms.
 
@@ -133,6 +134,31 @@ services:
     project: ./src/api
     language: js
     host: appservice
+```
+
+### Multiple hooks per event
+
+You can configure multiple hooks per event across different scopes, such as the root registration level or for a specific service:
+
+```yml
+name: example-project
+services:
+    api:
+        project: src/api
+        host: containerapp
+        language: ts
+        hooks:
+            postprovision:
+                - shell: sh
+                  run: scripts/postprovision1.sh
+                - shell: sh
+                  run: scripts/postprovision2.sh
+hooks:
+    postprovision:
+        - shell: sh
+          run: scripts/postprovision1.sh
+        - shell: sh
+          run: scripts/postprovision2.sh
 ```
 
 ### Use environment variables with hooks

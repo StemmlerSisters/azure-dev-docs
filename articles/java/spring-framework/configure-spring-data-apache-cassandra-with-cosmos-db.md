@@ -1,12 +1,9 @@
 ---
 title: How to use Spring Data with Azure Cosmos DB for Apache Cassandra
 description: Learn how to use Spring Data with Azure Cosmos DB for Apache Cassandra.
-services: cosmos-db
-documentationcenter: java
 ms.date: 07/15/2022
-ms.author: bbenz
-ms.service: cosmos-db
-ms.tgt_pltfrm: multiple
+author: KarlErickson
+ms.author: hangwan
 ms.topic: article
 ms.custom: devx-track-java, spring-cloud-azure, devx-track-extended-java
 ---
@@ -33,8 +30,6 @@ The following procedure creates and configures an Azure Cosmos DB account in the
 
 1. Select **Create a resource**, then **Get started**, and then select **Azure Cosmos DB**.
 
-   ![Azure portal, create a resource, search for Azure Cosmos DB.][COSMOSDB01]
-
 1. On the **Select API option** screen, select **Cassandra**.
 
    ![Azure portal, create a resource, select API option, Cassandra selected.][COSMOSDB02]
@@ -43,8 +38,8 @@ The following procedure creates and configures an Azure Cosmos DB account in the
 
    - **Subscription**: Specify your Azure subscription to use.
    - **Resource group**: Specify whether to create a new resource group, or choose an existing resource group.
-   - **Account name**: Choose a unique name for your Azure Cosmos DB account; this name will be used to create a fully qualified domain name like *wingtiptoyscassandra.documents.azure.com*.
-   - **API**: Specify *Cassandra* for this tutorial.
+   - **Account name**: Choose a unique name for your Azure Cosmos DB account; this name will be used to create a fully qualified domain name like **wingtiptoyscassandra.documents.azure.com**.
+   - **API**: Specify **Cassandra** for this tutorial.
    - **Location**: Specify the closest geographic region for your database.
 
    >[!div class="mx-imgBorder"]
@@ -53,9 +48,6 @@ The following procedure creates and configures an Azure Cosmos DB account in the
 1. When you've entered all of the above information, click **Review + create**.
 
 1. If everything looks correct on the review page, click **Create**.
-
-   >[!div class="mx-imgBorder"]
-   >![Review your Azure Cosmos DB account settings.][COSMOSDB04]
 
 It takes a few minutes to deploy the database.
 
@@ -94,9 +86,9 @@ The following procedure configures the test application.
    git clone https://github.com/Azure-Samples/spring-data-cassandra-on-azure.git
    ```
 
-1. Locate the *application.properties* file in the *resources* directory of the sample project, or create the file if it doesn't already exist.
+1. Locate the **application.properties** file in the **resources** directory of the sample project, or create the file if it doesn't already exist.
 
-1. Open the *application.properties* file in a text editor, and add or configure the following lines in the file, and replace the sample values with the appropriate values from earlier:
+1. Open the **application.properties** file in a text editor, and add or configure the following lines in the file, and replace the sample values with the appropriate values from earlier:
 
    ```yaml
    spring.data.cassandra.contact-points=wingtiptoyscassandra.cassandra.cosmos.azure.com
@@ -114,11 +106,11 @@ The following procedure configures the test application.
    | `spring.data.cassandra.username` | Specifies your **Username** from earlier in this article. |
    | `spring.data.cassandra.password` | Specifies your **Primary Password** from earlier in this article. |
 
-1. Save and close the *application.properties* file.
+1. Save and close the **application.properties** file.
 
 ## Package and test the sample application
 
-Browse to the directory that contains the *pom.xml* file to build and test the application.
+Browse to the directory that contains the **pom.xml** file to build and test the application.
 
 1. Build the sample application with Maven; for example:
 
@@ -192,10 +184,8 @@ For more information about using Azure with Java, see the [Azure for Java Develo
 
 <!-- IMG List -->
 
-[COSMOSDB01]: media/configure-spring-data-apache-cassandra-with-cosmos-db/create-cosmos-db-01.png
 [COSMOSDB02]: media/configure-spring-data-apache-cassandra-with-cosmos-db/create-cosmos-db-02.png
 [COSMOSDB03]: media/configure-spring-data-apache-cassandra-with-cosmos-db/create-cosmos-db-03.png
-[COSMOSDB04]: media/configure-spring-data-apache-cassandra-with-cosmos-db/create-cosmos-db-04.png
 [COSMOSDB05]: media/configure-spring-data-apache-cassandra-with-cosmos-db/create-cosmos-db-05.png
 [COSMOSDB05-1]: media/configure-spring-data-apache-cassandra-with-cosmos-db/create-cosmos-db-05-1.png
 [COSMOSDB06]: media/configure-spring-data-apache-cassandra-with-cosmos-db/create-cosmos-db-06.png

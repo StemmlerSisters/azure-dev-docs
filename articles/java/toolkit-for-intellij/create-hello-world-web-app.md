@@ -1,18 +1,10 @@
 ---
 title: Create a Hello World web app for Azure App Service using IntelliJ
 description: This tutorial shows you how to use the Azure Toolkit for IntelliJ to create a Hello World Web App for Azure.
-services: app-service
-keywords: java, intellij, web app, azure app service, hello world, quick start
-documentationcenter: java
 author: KarlErickson
 ms.author: jialuogan
-ms.assetid: 75ce7b36-e3ae-491d-8305-4b42ce37db4e
-ms.reviewer: jialuogan
 ms.date: 09/09/2020
-ms.service: app-service
-ms.tgt_pltfrm: multiple
 ms.topic: article
-ms.workload: web
 ms.custom: devx-track-java, devx-track-extended-java
 ---
 
@@ -54,12 +46,12 @@ The following steps walk you through the Azure sign-in process in your IntelliJ 
 1. Expand the **Artifact Coordinates** dropdown to view all input fields. Specify the following information for your new web app, and then click **Next**:
 
    * **Name**: The name of your web app. This value will be used to automatically fill in the web app's **ArtifactId** field.
-   * **GroupId**: The name of the artifact group, usually a company domain, such as *com.microsoft.azure*.
-   * **Version**: We'll keep the default version *1.0-SNAPSHOT*.
+   * **GroupId**: The name of the artifact group, usually a company domain, such as **com.microsoft.azure**.
+   * **Version**: We'll keep the default version **1.0-SNAPSHOT**.
 
 1. Customize any Maven settings or accept the defaults, and then click **Finish**.
 
-1. To find the generated code, navigate to your project on the left-hand **Project** tab, then open the file *src/main/webapp/index.jsp*. You will see code similar to the following example.
+1. To find the generated code, navigate to your project on the left-hand **Project** tab, then open the file **src/main/webapp/index.jsp**. You will see code similar to the following example.
 
    ```html
    <html>
@@ -84,7 +76,7 @@ The following steps walk you through the Azure sign-in process in your IntelliJ 
    b. In the pop-up **Create WebApp** dialog box, specify the following information and click **OK**:
 
       * **Name**: The WebApp's domain name. This value should be unique across Azure.
-      * **Platform**: Select *Linux-Java 8-TOMCAT 9.0* or as appropriate.
+      * **Platform**: Select **Linux-Java 8-TOMCAT 9.0** or as appropriate.
 
    c. To deploy to an existing webapp, choose the web app from WebApp drop down, and then click **Run**.
 

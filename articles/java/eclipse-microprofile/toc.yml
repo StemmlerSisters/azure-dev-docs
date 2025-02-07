@@ -1,3 +1,4 @@
+items:
 - name: Eclipse MicroProfile on Azure documentation
   href: index.yml
   items: 
@@ -57,8 +58,6 @@
             href: https://start.microprofile.io/
           - name: Open Liberty generator
             href: https://start.openliberty.io/
-          - name: WildFly Swarm (Thorntail) generator
-            href: https://thorntail.io/generator/
           - name: KumuluzEE generator
             href: https://ee.kumuluz.com/generator/
           - name: Jeddict generator

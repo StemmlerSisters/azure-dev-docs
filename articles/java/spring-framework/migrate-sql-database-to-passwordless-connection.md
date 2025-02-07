@@ -1,10 +1,9 @@
 ---
 title: Migrate a Java application to use passwordless connections with Azure SQL Database
 description: Learn how to migrate a Java application to use passwordless connections with Azure SQL Database.
-ms.service: sql-database
 ms.topic: how-to
 author: KarlErickson
-ms.author: xiada
+ms.author: hangwan
 ms.date: 01/18/2023
 ms.custom: passwordless-java, spring-cloud-azure, devx-track-java, devx-track-azurecli, devx-track-extended-java
 ---
@@ -136,7 +135,7 @@ Next, use the following steps to update your code to use passwordless connection
    > [!NOTE]
    > For more information about how to manage Spring Cloud Azure library versions by using a bill of materials (BOM), see the [Getting started](developer-guide-overview.md#getting-started) section of the [Spring Cloud Azure developer guide](developer-guide-overview.md).
 
-1. Update the *application.yaml* or *application.properties* file as shown in the following example. Remove `spring.datasource.username` and `spring.datasource.password` properties.
+1. Update the **application.yaml** or **application.properties** file as shown in the following example. Remove `spring.datasource.username` and `spring.datasource.password` properties.
 
    ```yaml
    spring:
@@ -170,8 +169,6 @@ The following steps show you how to assign a system-assigned managed identity fo
 1. On the main overview page of your Azure App Service instance, select **Identity** from the navigation pane.
 
 1. On the **System assigned** tab, make sure to set the **Status** field to **on**. A system assigned identity is managed by Azure internally and handles administrative tasks for you. The details and IDs of the identity are never exposed in your code.
-
-   :::image type="content" source="media/passwordless-connections/migration-create-identity.png" alt-text="Screenshot of Azure portal Identity page of App Service resource with System assigned tab showing and Status field highlighted." lightbox="media/passwordless-connections/migration-create-identity.png":::
 
 ##### [Service Connector](#tab/service-connector)
 
