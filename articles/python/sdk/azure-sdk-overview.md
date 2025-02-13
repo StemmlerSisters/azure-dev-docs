@@ -1,7 +1,7 @@
 ---
 title: Use the Azure libraries (SDK) for Python
 description: Overview of the features and capabilities of the Azure libraries for Python that help developers be more productive when creating, using, and managing Azure resources.
-ms.date: 10/19/2023
+ms.date: 02/06/2025
 ms.topic: conceptual
 ms.custom: devx-track-python, py-fresh-zinc
 ---
@@ -14,9 +14,9 @@ The open-source Azure libraries for Python simplify provisioning, managing, and 
 
 - The Azure libraries are how you communicate with Azure services *from* Python code that you run either locally or in the cloud. (Whether you can run Python code within the scope of a particular service depends on whether that service itself currently supports Python.)
 
-- The libraries support [Python](https://www.python.org/) 3.7 or later. For more information about supported versions of Python, see [Azure SDKs Python version support policy](https://github.com/Azure/azure-sdk-for-python/wiki/Azure-SDKs-Python-version-support-policy). If you're using [PyPy](https://www.pypy.org/), make sure the version you use at least supports the Python version mentioned previously.
+- The libraries support [Python](https://www.python.org/) 3.8 or later. For more information about supported versions of Python, see [Azure SDKs Python version support policy](https://github.com/Azure/azure-sdk-for-python/wiki/Azure-SDKs-Python-version-support-policy). If you're using [PyPy](https://www.pypy.org/), make sure the version you use at least supports the Python version mentioned previously.
 
-- The Azure SDK for Python is composed solely of over 180 individual Python libraries that relate to specific Azure services. There are no other tools in the "SDK".
+- The Azure SDK for Python is composed solely of over 180 individual Python libraries that relate to specific Azure services. There are no other tools in the SDK.
 
 - When you run code locally, authenticating with Azure relies on environment variables as described in [How to authenticate Python apps to Azure services using the Azure SDK for Python](./authentication-overview.md#authentication-during-local-development).
 

@@ -2,7 +2,7 @@
 title: Deploy a Flask or FastAPI web app as a container in Azure Container Apps
 description: An overview of how to create and deploy a containerized Python web app (Flask or FastAPI) on Azure Container Apps.
 ms.topic: conceptual
-ms.date: 04/13/2023
+ms.date: 12/16/2024
 ms.custom: devx-track-python
 ---
 
@@ -68,49 +68,11 @@ Check the *requirements.txt* file to make sure it contains `gunicorn`.
 
 :::code language="python" source="~/../msdocs-python-flask-webapp-quickstart/requirements.txt" highlight="2" :::
 
-### [FastAPI](#tab/web-app-fastapi)
-
-```dockerfile
-# syntax=docker/dockerfile:1
-
-FROM python:3.11
-
-WORKDIR /code
-
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
-
-COPY . .
-
-EXPOSE 3100
-
-CMD ["gunicorn", "main:app"]
-```
-
-`3100` is used for the container port (internal) in this example, but you can use any free port.
-
-Check the *requirements.txt* file to make sure it contains `gunicorn` and `uvicorn`.
-
-:::code language="python" source="~/../msdocs-python-fastapi-webapp-quickstart/requirements.txt" highlight="2-3" :::
-
----
-
-Add a *\.dockerignore* file to exclude unnecessary files from the image.
-
-```dockerignore
-.git*
-**/*.pyc
-.venv/
-```
-
 ## Configure gunicorn
 
 Gunicorn can be configured with a *gunicorn.conf.py* file. When the *gunicorn.conf.py* file is located in the same directory where `gunicorn` is run, you don't need to specify its location in the `ENTRYPOINT` or `CMD` instruction of the *Dockerfile*. For more information about specifying the configuration file, see [Gunicorn settings][22].
 
 In this tutorial, the suggested configuration file configures GUnicorn to increase its number of workers based on the number of CPU cores available. For more information about *gunicorn.conf.py* file settings, see [Gunicorn configuration][23].
-
-### [Flask](#tab/web-app-flask)
 
 ```text
 # Gunicorn configuration file
@@ -129,26 +91,47 @@ threads = workers
 timeout = 120
 ```
 
+
 ### [FastAPI](#tab/web-app-fastapi)
 
-```text
-# Gunicorn configuration file
-import multiprocessing
+```dockerfile
+FROM python:3.11
 
-max_requests = 1000
-max_requests_jitter = 50
+# Set the working directory in the container
+WORKDIR /code
 
-log_file = "-"
+# Copy the requirements file into the container
+COPY requirements.txt .
 
-bind = "0.0.0.0:3100"
+# Install the dependencies
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-worker_class = "uvicorn.workers.UvicornWorker"
-workers = (multiprocessing.cpu_count() * 2) + 1
+# Copy the rest of the application code into the container
+COPY . .
+
+# Expose the port that the app will run on
+EXPOSE 3100
+
+# Command to run the application using Uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3100", "--workers", "4"]
 ```
 
-With the `uvicorn.workers.UvicornWorker` worker class, you can use `gunicorn` to run `FastAPI` apps. For more information, see [Running uvicorn with gunicorn][25].
+`3100` is used for the container port (internal) in this example, but you can use any free port.
+
+Check the *requirements.txt* file to make sure it contains `uvicorn`.
+
+:::code language="python" source="~/../msdocs-python-fastapi-webapp-quickstart/requirements.txt" highlight="2-3" :::
 
 ---
+
+Add a *\.dockerignore* file to exclude unnecessary files from the image.
+
+```dockerignore
+.git*
+**/*.pyc
+.venv/
+```
+
 
 ## Build and run the image locally
 
@@ -190,7 +173,7 @@ Open the ```http://localhost:3100``` URL in your browser to see the web app runn
 
 The `--detach` option runs the container in the background. The `--publish` option maps the container port to a port on the host. The host port (external) is first in the pair, and the container port (internal) is second. For more information, see [Docker run reference][21].
 
-## Deploy to web app to Azure
+## Deploy web app to Azure
 
 To deploy the Docker image to Azure Container Apps, use the [az containerapp up][6] command. (The following commands are shown for the Bash shell. Change the continuation character (`\`) as appropriate for other shells.)
 
@@ -207,7 +190,7 @@ az containerapp up \
 ```azurecli
 az containerapp up \
   --resource-group web-fastapi-aca-rg --name web-aca-app \ 
-  --ingress external --target-port 80 --source .
+  --ingress external --target-port 3100 --source .
 ```
 
 ---
@@ -233,9 +216,19 @@ All the Azure resources created in this tutorial are in the same resource group.
 
 To remove resources, use the [az group delete][20] command.
 
+### [Flask](#tab/web-app-flask)
+
 ```azurecli
-az group delete --name web-aca-app
+az group delete --name web-flask-aca-rg
 ```
+
+### [FastAPI](#tab/web-app-fastapi)
+
+```azurecli
+az group delete --name web-fastapi-aca-rg
+```
+
+---
 
 You can also remove the group in the [Azure portal][2] or in [Visual Studio Code][3] and the [Azure Tools Extension][5].
 

@@ -33,7 +33,7 @@ For more details on how to configure exporters, add manual instrumentation, or e
 
 If you use OpenTelemetry SDK directly, make sure to configure SDK and exporter for the backend of your choice. For more information, see [OpenTelemetry documentation](https://opentelemetry.io/docs/instrumentation/java/manual_instrumentation/).
 
-To enable Azure SDK tracing, add the latest `com.azure:azure-core-tracing-opentelemetry` packages to your application. For example, in Maven, add the following entry to your *pom.xml* file:
+To enable Azure SDK tracing, add the latest `com.azure:azure-core-tracing-opentelemetry` packages to your application. For example, in Maven, add the following entry to your **pom.xml** file:
 
 ```xml
 <dependency>
@@ -73,4 +73,4 @@ To find out which spans and attributes the SDK emits, see the [Azure SDK semanti
 
 ## Next steps
 
-Now that you're familiar with the core cross-cutting functionality in the Azure SDK for Java, see [Azure authentication with Java and Azure Identity](identity.md) to learn how you can create secure applications.
+Now that you're familiar with the core cross-cutting functionality in the Azure SDK for Java, see [Azure authentication with Java and Azure Identity](authentication/overview.md) to learn how you can create secure applications.

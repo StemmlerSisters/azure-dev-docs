@@ -1,7 +1,29 @@
 # Testing the new code owners feature in GitHub. Please contact Cory Fowler if you have questions.
 
-# DevOps
-articles/ansible/ @TomArcherMsft
-articles/chef/ @TomArcherMsft
-articles/jenkins/ @TomArcherMsft
-articles/terraform/ @TomArcherMsft
+# Global owner
+* @mcleanbyron
+
+# Config
+/articles/docfx.json @KarlErickson @mcleanbyron
+/.openpublishing.publish.config.json @KarlErickson @mcleanbyron
+/CODEOWNERS @KarlErickson @mcleanbyron
+
+# AI
+
+/articles/ai/ @ms-johnalex
+
+# Intro
+/articles/intro/ @mcleanbyron
+
+# DevEx
+/articles/java/ @KarlErickson
+/articles/python/ @bobtabor-msft
+/articles/go/ @bobtabor-msft
+
+# Tools
+/articles/azure-cli/ @alexwolfmsft
+
+# Azure SDK authentication topics
+/articles/java/sdk/authentication/ @scottaddie @g2vinay @billwert
+/articles/javascript/sdk/authentication/ @scottaddie @KarishmaGhiya @minhanh-phan @maorleger
+/articles/python/sdk/authentication/ @scottaddie @pvaneck @xiangyan99

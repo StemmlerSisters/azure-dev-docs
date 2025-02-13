@@ -4,7 +4,7 @@ description: This guide describes what you should be aware of when you want to m
 author: KarlErickson
 ms.author: manriem
 ms.topic: conceptual
-ms.date: 2/28/2020
+ms.date: 09/20/2024
 ms.custom: devx-track-java, devx-track-azurecli, migration-java, devx-track-extended-java
 recommendations: false
 ---
@@ -21,7 +21,7 @@ To ensure a successful migration, before you start, complete the assessment and 
 
 ### Inventory all secrets
 
-Check all properties and configuration files on the production server(s) for any secrets and passwords. Be sure to check *ibm-web-bnd.xml* in your WARs. Configuration files that contain passwords or credentials may also be found inside your application.
+Check all properties and configuration files on the production server(s) for any secrets and passwords. Be sure to check **ibm-web-bnd.xml** in your WARs. Configuration files that contain passwords or credentials may also be found inside your application.
 
 [!INCLUDE [inventory-all-certificates](includes/inventory-all-certificates.md)]
 
@@ -33,7 +33,7 @@ Inventory all JNDI resources. Some, such as JMS message brokers, may require mig
 
 #### Inside your application
 
-Inspect the file *WEB-INF/ibm-web-bnd.xml* and/or *WEB-INF/web.xml*.
+Inspect the file **WEB-INF/ibm-web-bnd.xml** and/or **WEB-INF/web.xml**.
 
 ### Document datasources
 
@@ -84,10 +84,10 @@ If your application uses JCA connectors, you'll have to validate the JCA connect
 
 ### Determine whether your application is packaged as an EAR
 
-If your application is packaged as an EAR file, be sure to examine the *application.xml* and *application-bnd.xml* files and capture their configurations.
+If your application is packaged as an EAR file, be sure to examine the **application.xml** and **application-bnd.xml** files and capture their configurations.
 
 > [!NOTE]
-> If you want to be able to scale each of your web applications independently for better use of your AKS resources you should break up the EAR into separate web applications.
+> If you want to be able to scale each of your web applications independently for better use of your Azure Kubernetes Service (AKS) resources you should break up the EAR into separate web applications.
 
 [!INCLUDE [identify-all-outside-processes-and-daemons-running-on-the-production-servers](includes/identify-all-outside-processes-and-daemons-running-on-the-production-servers.md)]
 

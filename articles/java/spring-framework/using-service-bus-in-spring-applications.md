@@ -2,7 +2,7 @@
 title: Use Azure Service Bus in Spring applications
 description: Shows you how to use Azure Service Bus in Java applications built with the Spring framework.
 author: KarlErickson
-ms.author: seal
+ms.author: hangwan
 ms.date: 04/21/2023
 ms.topic: article
 ms.custom: devx-track-java, spring-cloud-azure, devx-track-extended-java
@@ -53,7 +53,7 @@ The [Spring Cloud Azure Service Bus Starter](https://mvnrepository.com/artifact/
 
 ### Add the Service Bus dependency
 
-To install the Spring Cloud Azure Service Bus Starter module, add the following dependencies to your *pom.xml* file:
+To install the Spring Cloud Azure Service Bus Starter module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -63,13 +63,18 @@ To install the Spring Cloud Azure Service Bus Starter module, add the following 
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.5.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Cloud Azure Service Bus artifact:
 
@@ -228,7 +233,7 @@ You can build those client beans by yourself, but the process is complicated. In
    ```
 
    > [!NOTE]
-   > Be sure to replace the *`<service-bus-fully-qualified-namespace>`* placeholder with your Service Bus host name from the Azure portal. Replace the *`<service-bus-queue-name>`* placeholder with your own queue name configured in your Service Bus namespace.
+   > Be sure to replace the `<service-bus-fully-qualified-namespace>` placeholder with your Service Bus host name from the Azure portal. Replace the `<service-bus-queue-name>` placeholder with your own queue name configured in your Service Bus namespace.
 
 1. Inject the client beans to your application, as shown in the following example:
 
@@ -279,12 +284,12 @@ You can build those client beans by yourself, but the process is complicated. In
 The following list shows reasons why this code isn't flexible or graceful:
 
 - The namespace and queue/topic/subscription names are hard coded.
-- If you use `@Value` to get configurations from the Spring environment, you can't have IDE hints in your *application.properties* file.
+- If you use `@Value` to get configurations from the Spring environment, you can't have IDE hints in your **application.properties** file.
 - If you have a microservice scenario, you must duplicate the code in each project, and it's easy to make mistakes and hard to be consistent.
 
 Fortunately, building the client beans by yourself isn't necessary with Spring Cloud Azure. Instead, you can directly inject the beans and use the [configuration properties](spring-cloud-azure.md?tabs=maven#configuration-properties) that you're already familiar with to configure Service Bus.
 
-Spring Cloud Azure also provides the following global configurations for different scenarios. For more information, see the [Global configuration for Azure Service SDKs](spring-cloud-azure.md?tabs=maven#global-configuration-for-azure-service-sdks) section of the [Spring Cloud Azure developer guide](spring-cloud-azure.md).
+Spring Cloud Azure also provides the following global configurations for different scenarios. For more information, see the [Global configuration for Azure Service SDKs](configuration.md#global-configuration-for-azure-service-sdks) section of the [Spring Cloud Azure configuration](configuration.md).
 
 - Proxy options.
 - Retry options.
@@ -304,7 +309,7 @@ This guide shows you how to use Spring Cloud Azure Service Bus Starter for JMS A
 
 ### Add the Service Bus dependency
 
-To install the Spring Cloud Azure Service Bus JMS Starter module, add the following dependencies to your *pom.xml* file:
+To install the Spring Cloud Azure Service Bus JMS Starter module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -314,13 +319,18 @@ To install the Spring Cloud Azure Service Bus JMS Starter module, add the follow
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.5.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Cloud Azure Service Bus JMS artifact:
 
@@ -387,7 +397,7 @@ To install the Spring Cloud Azure Service Bus JMS Starter module, add the follow
    ```
 
    > [!NOTE]
-   > Be sure to replace the *`<service-bus-queue-name>`* placeholder with your own queue name configured in your Service Bus namespace.
+   > Be sure to replace the `<service-bus-queue-name>` placeholder with your own queue name configured in your Service Bus namespace.
    >
    > If you're using a topic/subscription, change the `destination` parameter as the topic name, and the `containerFactory` should be `topicJmsListenerContainerFactory`. Also, add the `subscription` parameter to describe the subscription name.
 
@@ -412,7 +422,7 @@ To install the Spring Cloud Azure Service Bus JMS Starter module, add the follow
    ```
 
    > [!NOTE]
-   > Be sure to replace the *`<service-bus-queue-name>`* placeholder with your own queue name configured in your Service Bus namespace.
+   > Be sure to replace the `<service-bus-queue-name>` placeholder with your own queue name configured in your Service Bus namespace.
 
    > [!TIP]
    > Be sure to add the `@EnableIntegration` annotation, which triggers the discovery of methods annotated with `@JmsListener`, creating the message listener container under the covers.
@@ -441,7 +451,7 @@ This guide shows you how to use Spring Messaging Azure Service Bus to send messa
 
 ### Add the Service Bus dependency
 
-To install the Spring Messaging Azure Service Bus module, add the following dependencies to your *pom.xml* file:
+To install the Spring Messaging Azure Service Bus module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -451,13 +461,18 @@ To install the Spring Messaging Azure Service Bus module, add the following depe
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.5.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Messaging Service Bus and Spring Cloud Azure starter artifacts:
 
@@ -501,7 +516,7 @@ To install the Spring Messaging Azure Service Bus module, add the following depe
    ```
 
    > [!Note]
-   > If you're using a topic/subscription, change the annotation parameter of `destination` as the topic name, and add the `subscription` parameter to describe the subscription name.
+   > If you're using a topic/subscription, change the annotation parameter of `destination` as the topic name, and add the `group` parameter to describe the subscription name.
 
 1. Wire up a sender and a receiver to send and receive messages with Spring, as shown in the following example:
 
@@ -543,7 +558,7 @@ This guide shows you how to use Spring Integration Azure Service Bus to send mes
 
 ### Add the Service Bus dependency
 
-To install the Spring Cloud Azure Service Bus Integration Starter module, add the following dependencies to your *pom.xml* file:
+To install the Spring Cloud Azure Service Bus Integration Starter module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -553,13 +568,18 @@ To install the Spring Cloud Azure Service Bus Integration Starter module, add th
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.5.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Cloud Azure Service Bus Integration artifact:
 
@@ -697,7 +717,7 @@ This guide shows you how to use Spring Cloud Stream Service Bus Binder to send m
 
 ### Add the Service Bus dependency
 
-To install the Spring Cloud Azure Service Bus Stream Binder module, add the following dependencies to your *pom.xml* file:
+To install the Spring Cloud Azure Service Bus Stream Binder module, add the following dependencies to your **pom.xml** file:
 
 - The Spring Cloud Azure Bill of Materials (BOM):
 
@@ -707,13 +727,18 @@ To install the Spring Cloud Azure Service Bus Stream Binder module, add the foll
        <dependency>
          <groupId>com.azure.spring</groupId>
          <artifactId>spring-cloud-azure-dependencies</artifactId>
-         <version>4.5.0</version>
+         <version>5.19.0</version>
          <type>pom</type>
          <scope>import</scope>
          </dependency>
      </dependencies>
   </dependencyManagement>
   ```
+
+  > [!NOTE]
+  > If you're using Spring Boot 2.x, be sure to set the `spring-cloud-azure-dependencies` version to `4.19.0`.
+  > This Bill of Material (BOM) should be configured in the `<dependencyManagement>` section of your **pom.xml** file. This ensures that all Spring Cloud Azure dependencies are using the same version.
+  > For more information about the version used for this BOM, see [Which Version of Spring Cloud Azure Should I Use](https://github.com/Azure/azure-sdk-for-java/wiki/Spring-Versions-Mapping#which-version-of-spring-cloud-azure-should-i-use).
 
 - The Spring Cloud Azure Service Bus Integration artifact:
 
@@ -747,7 +772,7 @@ To install the Spring Cloud Azure Service Bus Stream Binder module, add the foll
      }
      ```
 
-   - Add the configuration to specify the `queue` name for consuming by replacing the *`<service-bus-queue-name>`* placeholder, as shown in the following example:
+   - Add the configuration to specify the `queue` name for consuming by replacing the `<service-bus-queue-name>` placeholder, as shown in the following example:
 
      ```properties
       # name for the `Consumer` bean
@@ -778,7 +803,7 @@ To install the Spring Cloud Azure Service Bus Stream Binder module, add the foll
      }
      ```
 
-   - Add the configuration to specify the `queue` name for sending by replacing the *`<your-servicebus-queue-name>`* placeholder in the following example:
+   - Add the configuration to specify the `queue` name for sending by replacing the `<your-servicebus-queue-name>` placeholder in the following example:
 
      ```properties
      # "consume" is added from the previous step

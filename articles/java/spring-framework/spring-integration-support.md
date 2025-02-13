@@ -3,14 +3,14 @@ title: Spring Cloud Azure support for Spring Integration
 description: This article describes how Spring Cloud Azure and Spring Integration can be used together.
 ms.date: 04/06/2023
 author: KarlErickson
-ms.author: v-yeyonghui
+ms.author: hangwan
 ms.topic: reference
 ms.custom: devx-track-java, devx-track-extended-java
 ---
 
 # Spring Cloud Azure support for Spring Integration
 
-**This article applies to:** ✔️ Version 4.12.0 ✔️ Version 5.6.0
+**This article applies to:** ✅ Version 4.19.0 ✅ Version 5.19.0
 
 Spring Integration Extension for Azure provides Spring Integration adapters for the various services provided by the [Azure SDK for Java](https://github.com/Azure/azure-sdk-for-java/). We provide Spring Integration support for these Azure services: Event Hubs, Service Bus, Storage Queue. The following is a list of supported adapters:
 
@@ -115,14 +115,14 @@ developers can use `EventHubsContainerProperties` for the configuration. See [th
 
 1. Fill the credential configuration options.
 
-   * For credentials as connection string, configure the following properties in your *application.yml* file:
+   * For credentials as connection string, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
        cloud:
          azure:
            eventhubs:
-             connection-string: ${AZURE_SERVICE_BUS_CONNECTION_STRING}
+             connection-string: ${AZURE_EVENT_HUBS_CONNECTION_STRING}
              processor:
                checkpoint-store:
                  container-name: ${CHECKPOINT-CONTAINER}
@@ -130,7 +130,7 @@ developers can use `EventHubsContainerProperties` for the configuration. See [th
                  account-key: ${CHECKPOINT-ACCESS-KEY}
      ```
 
-   * For credentials as managed identities, configure the following properties in your *application.yml* file:
+   * For credentials as managed identities, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -140,14 +140,14 @@ developers can use `EventHubsContainerProperties` for the configuration. See [th
              managed-identity-enabled: true
              client-id: ${AZURE_CLIENT_ID}
            eventhubs:
-             namespace: ${AZURE_SERVICE_BUS_NAMESPACE}
+             namespace: ${AZURE_EVENT_HUBS_NAMESPACE}
              processor:
                checkpoint-store:
                  container-name: ${CONTAINER_NAME}
                  account-name: ${ACCOUNT_NAME}
      ```
 
-   * For credentials as service principal, configure the following properties in your *application.yml* file:
+   * For credentials as service principal, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -157,14 +157,17 @@ developers can use `EventHubsContainerProperties` for the configuration. See [th
              client-id: ${AZURE_CLIENT_ID}
              client-secret: ${AZURE_CLIENT_SECRET}
            profile:
-             tenant-id: ${AZURE_TENANT_ID}
+             tenant-id: <tenant>
            eventhubs:
-             namespace: ${AZURE_SERVICE_BUS_NAMESPACE}
+             namespace: ${AZURE_EVENT_HUBS_NAMESPACE}
              processor:
                checkpoint-store:
                  container-name: ${CONTAINER_NAME}
                  account-name: ${ACCOUNT_NAME}
      ```
+
+> [!NOTE]
+> The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID. For more information about these values, see the [Used the wrong endpoint (personal and organization accounts)](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist#cause-3-used-the-wrong-endpoint-personal-and-organization-accounts) section of [Error AADSTS50020 - User account from identity provider does not exist in tenant](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist). For information on converting your single-tenant app, see [Convert single-tenant app to multitenant on Microsoft Entra ID](/entra/identity-platform/howto-convert-app-to-be-multi-tenant).
 
 1. Create `DefaultMessageHandler` with the `EventHubsTemplate` bean to send messages to Event Hubs.
 
@@ -397,6 +400,7 @@ Connection configurable properties of spring-cloud-azure-starter-integration-ser
 > |-----------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------|
 > | **spring.cloud.azure.servicebus**.enabled           | boolean | Whether an Azure Service Bus is enabled.                                                                                    |
 > | **spring.cloud.azure.servicebus**.connection-string | String  | Service Bus Namespace connection string value.                                                                              |
+> | **spring.cloud.azure.servicebus**.custom-endpoint-address | String  | The custom endpoint address to use when connecting to Service Bus.                                                                              |
 > | **spring.cloud.azure.servicebus**.namespace         | String  | Service Bus Namespace value, which is the prefix of the FQDN. A FQDN should be composed of NamespaceName.DomainName |
 > | **spring.cloud.azure.servicebus**.domain-name       | String  | Domain name of an Azure Service Bus Namespace value.                                                                        |
 
@@ -411,7 +415,7 @@ developers can use `ServiceBusContainerProperties` for the configuration. See [t
 
 1. Fill the credential configuration options.
 
-   * For credentials as connection string, configure the following properties in your *application.yml* file:
+   * For credentials as connection string, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -421,7 +425,7 @@ developers can use `ServiceBusContainerProperties` for the configuration. See [t
              connection-string: ${AZURE_SERVICE_BUS_CONNECTION_STRING}
      ```
 
-   * For credentials as managed identities, configure the following properties in your *application.yml* file:
+   * For credentials as managed identities, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -431,12 +435,15 @@ developers can use `ServiceBusContainerProperties` for the configuration. See [t
              managed-identity-enabled: true
              client-id: ${AZURE_CLIENT_ID}
            profile:
-             tenant-id: ${AZURE_TENANT_ID}
+             tenant-id: <tenant>
            servicebus:
              namespace: ${AZURE_SERVICE_BUS_NAMESPACE}
      ```
 
-   * For credentials as service principal, configure the following properties in your *application.yml* file:
+> [!NOTE]
+> The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID. For more information about these values, see the [Used the wrong endpoint (personal and organization accounts)](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist#cause-3-used-the-wrong-endpoint-personal-and-organization-accounts) section of [Error AADSTS50020 - User account from identity provider does not exist in tenant](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist). For information on converting your single-tenant app, see [Convert single-tenant app to multitenant on Microsoft Entra ID](/entra/identity-platform/howto-convert-app-to-be-multi-tenant).
+
+   * For credentials as service principal, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -446,10 +453,13 @@ developers can use `ServiceBusContainerProperties` for the configuration. See [t
              client-id: ${AZURE_CLIENT_ID}
              client-secret: ${AZURE_CLIENT_SECRET}
            profile:
-             tenant-id: ${AZURE_TENANT_ID}
+             tenant-id: <tenant>
            servicebus:
              namespace: ${AZURE_SERVICE_BUS_NAMESPACE}
      ```
+
+> [!NOTE]
+> The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID. For more information about these values, see the [Used the wrong endpoint (personal and organization accounts)](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist#cause-3-used-the-wrong-endpoint-personal-and-organization-accounts) section of [Error AADSTS50020 - User account from identity provider does not exist in tenant](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist). For information on converting your single-tenant app, see [Convert single-tenant app to multitenant on Microsoft Entra ID](/entra/identity-platform/howto-convert-app-to-be-multi-tenant).
 
 1. Create `DefaultMessageHandler` with the `ServiceBusTemplate` bean to send messages to Service Bus, set the entity type for the ServiceBusTemplate. This sample takes Service Bus Queue as example.
 
@@ -605,7 +615,7 @@ Mapping between Service Bus Headers and Spring Headers:
 
 This starter supports [Service Bus partitioning](/azure/service-bus-messaging/service-bus-partitioning) by allowing setting partition key and session ID in the message header. This section introduces how to set partition key for messages.
 
-*Recommended:* Use `ServiceBusMessageHeaders.PARTITION_KEY` as the key of the header.
+Recommended: Use `ServiceBusMessageHeaders.PARTITION_KEY` as the key of the header.
 
 ```java
 public class SampleController {
@@ -620,7 +630,7 @@ public class SampleController {
 }
 ```
 
-*Not recommended but currently supported:* `AzureHeaders.PARTITION_KEY` as the key of the header.
+Not recommended but currently supported: `AzureHeaders.PARTITION_KEY` as the key of the header.
 
 ```java
 public class SampleController {
@@ -658,6 +668,17 @@ public class SampleController {
 
 > [!NOTE]
 > When the `ServiceBusMessageHeaders.SESSION_ID` is set in the message headers, and a different `ServiceBusMessageHeaders.PARTITION_KEY` header is also set, the value of the session ID will eventually be used to overwrite the value of the partition key.
+
+#### Customize Service Bus client properties
+
+Developers can use `AzureServiceClientBuilderCustomizer` to customize Service Bus Client properties. The following example customizes the `sessionIdleTimeout` property in `ServiceBusClientBuilder`:
+
+```java
+@Bean
+public AzureServiceClientBuilderCustomizer<ServiceBusClientBuilder.ServiceBusSessionProcessorClientBuilder> customizeBuilder() {
+    return builder -> builder.sessionIdleTimeout(Duration.ofSeconds(10));
+}
+```
 
 ### Samples
 
@@ -709,7 +730,7 @@ Connection configurable properties of spring-cloud-azure-starter-integration-sto
 
 1. Fill the credential configuration options.
 
-   * For credentials as connection string, configure the following properties in your *application.yml* file:
+   * For credentials as connection string, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -717,10 +738,10 @@ Connection configurable properties of spring-cloud-azure-starter-integration-sto
          azure:
            storage:
              queue:
-               connection-string: ${AZURE_SERVICE_BUS_CONNECTION_STRING}
+               connection-string: ${AZURE_STORAGE_QUEUE_CONNECTION_STRING}
      ```
 
-   * For credentials as managed identities, configure the following properties in your *application.yml* file:
+   * For credentials as managed identities, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -730,13 +751,16 @@ Connection configurable properties of spring-cloud-azure-starter-integration-sto
              managed-identity-enabled: true
              client-id: ${AZURE_CLIENT_ID}
            profile:
-             tenant-id: ${AZURE_TENANT_ID}
+             tenant-id: <tenant>
            storage:
              queue:
-               namespace: ${AZURE_SERVICE_BUS_NAMESPACE}
+               account-name: ${AZURE_STORAGE_QUEUE_ACCOUNT_NAME}
      ```
 
-   * For credentials as service principal, configure the following properties in your *application.yml* file:
+> [!NOTE]
+> The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID. For more information about these values, see the [Used the wrong endpoint (personal and organization accounts)](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist#cause-3-used-the-wrong-endpoint-personal-and-organization-accounts) section of [Error AADSTS50020 - User account from identity provider does not exist in tenant](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist). For information on converting your single-tenant app, see [Convert single-tenant app to multitenant on Microsoft Entra ID](/entra/identity-platform/howto-convert-app-to-be-multi-tenant).
+
+   * For credentials as service principal, configure the following properties in your **application.yml** file:
 
      ```yaml
      spring:
@@ -746,11 +770,14 @@ Connection configurable properties of spring-cloud-azure-starter-integration-sto
              client-id: ${AZURE_CLIENT_ID}
              client-secret: ${AZURE_CLIENT_SECRET}
            profile:
-             tenant-id: ${AZURE_TENANT_ID}
+             tenant-id: <tenant>
            storage:
              queue:
-               namespace: ${AZURE_SERVICE_BUS_NAMESPACE}
+               account-name: ${AZURE_STORAGE_QUEUE_ACCOUNT_NAME}
      ```
+
+> [!NOTE]
+> The values allowed for `tenant-id` are: `common`, `organizations`, `consumers`, or the tenant ID. For more information about these values, see the [Used the wrong endpoint (personal and organization accounts)](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist#cause-3-used-the-wrong-endpoint-personal-and-organization-accounts) section of [Error AADSTS50020 - User account from identity provider does not exist in tenant](/troubleshoot/azure/active-directory/error-code-aadsts50020-user-account-identity-provider-does-not-exist). For information on converting your single-tenant app, see [Convert single-tenant app to multitenant on Microsoft Entra ID](/entra/identity-platform/howto-convert-app-to-be-multi-tenant).
 
 1. Create `DefaultMessageHandler` with the `StorageQueueTemplate` bean to send messages to Storage Queue.
 

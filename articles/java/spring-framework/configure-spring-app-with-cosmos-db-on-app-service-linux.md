@@ -1,12 +1,11 @@
 ---
 title: Use Spring Data with Azure Cosmos DB for Apache Cassandra API
 description: This article will walk you through the process of building, configuring, deploying, troubleshooting, and scaling Java Web apps in Azure App Service on Linux.
-documentationcenter: java
-ms.reviewer: joshuapa
-ms.date: 07/22/2022
-ms.service: cosmos-db
+author: KarlErickson
+ms.author: hangwan
+ms.date: 08/28/2024
 ms.topic: article
-ms.custom: devx-track-java, devx-track-azurecli, spring-cloud-azure, devx-track-extended-java
+ms.custom: devx-track-java, devx-track-azurecli, spring-cloud-azure, devx-track-extended-java, linux-related-content
 ---
 
 # Use Spring Data with Azure Cosmos DB for Apache Cassandra API
@@ -35,7 +34,7 @@ The following prerequisites are required in order to follow the steps in this ar
 
 For this exercise you'll be using the Spring Todo app, which is a Java application built using [Spring Boot](https://spring.io/projects/spring-boot), [Spring Data for Azure Cosmos DB](./configure-spring-boot-starter-java-app-with-cosmos-db.md) and [Azure Cosmos DB](/azure/cosmos-db/sql-api-introduction).
 
-1. Clone the Spring Todo app and copy the contents of the *.prep* folder to initialize the project:
+1. Clone the Spring Todo app and copy the contents of the **.prep** folder to initialize the project:
 
    For bash:
 
@@ -74,7 +73,7 @@ The following procedure creates Azure Cosmos DB database using CLI.
    az account set -s <your-subscription-id>
    ```
 
-1. Create an Azure resource group, and write down the resource group name for later use.
+1. Create an Azure resource group, and save aside the resource group name for later use.
 
    ```azurecli
    az group create \
@@ -153,7 +152,7 @@ The following procedure runs the application on the development computer.
 
 The following procedure deploys the application to Linux on Azure.
 
-1. Open the *pom.xml* file that you previously copied to the **initial/spring-todo-app** directory of the repository. Ensure that the [Maven Plugin for Azure App Service](https://github.com/Microsoft/azure-maven-plugins/blob/develop/azure-webapp-maven-plugin/README.md) is included as seen in the following *pom.xml* file. If the version isn't set to **1.14.0**, then update the value.
+1. Open the **pom.xml** file that you previously copied to the **initial/spring-todo-app** directory of the repository. Ensure that the [Maven Plugin for Azure App Service](https://github.com/Microsoft/azure-maven-plugins/blob/develop/azure-webapp-maven-plugin/README.md) is included as seen in the following **pom.xml** file. If the version isn't set to **1.14.0**, then update the value.
 
    ```xml
    <plugins> 
@@ -307,9 +306,6 @@ The following procedure opens log files on Azure.
    2021-05-28T01:47:26.069984388Z 2021-05-28 01:47:26.069  INFO 124 --- [-nio-80-exec-10] c.a.s.s.   controller.TodoListController    : POST request access '/api/todolist' path with item: Milk
    2021-05-28T01:47:26.649080678Z 2021-05-28 01:47:26.648  INFO 124 --- [p-nio-80-exec-1] c.a.s.s.   controller.TodoListController    : GET request access '/api/todolist' path.
    ```
-
-1. When you're finished, you can check your results against the code in 
-[e2e-java-experience-in-app-service-linux-part-2/complete](https://github.com/Azure-Samples/e2e-java-experience-in-app-service-linux-part-2/tree/master/complete).
 
 ## Scale out the Spring Todo App
 
